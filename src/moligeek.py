@@ -93,7 +93,9 @@ def findadmin():
     txtlist=txt.split("\n")
     s=0
     f=0
+    num=len(txtlist)
     for i in txtlist:
+        print("\r进度("+str(s+f)+"/"+str(num)+")",end="")
         try:
             txturl=url+i
             r=requests.get(txturl,headers)
