@@ -34,7 +34,7 @@ def getsrc():
         response.encoding="utf–8"
         print(response.text)
         pathname = name.replace("/","_")
-        srcpath=path+"/src/"+pathname
+        srcpath=path+"/src/"+pathname+".txt"
         with open(srcpath,"w+") as f:
             f.write(response.text)
         print("成功写入文件，文件路径:"+srcpath)
