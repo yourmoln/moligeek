@@ -1,9 +1,15 @@
 #by yourmoln
-
+from socket import socket
+import threading
+from threading import Lock,Thread
 
 import requests
 import os
 from socket import gethostbyname
+
+#全局变量
+s=0
+f=0
 
 #获取脚本目录绝对路径
 path = os.path.split(os.path.realpath(__file__))[0]
@@ -73,6 +79,8 @@ def upform():
 
 #后台文件扫描
 def findadmin():
+    global s
+    global f
     kind=input("请选择后台语言类型\n[1]ASP\n[2]ASPX\n[3]DIR\n[4]JSP\n[5]MDB\n[6]PHP\n默认为php\n")
     if kind in ["1","ASP","asp"]:
         kind="ASP.txt"
@@ -96,17 +104,27 @@ def findadmin():
     num=len(txtlist)
     for i in txtlist:
         print("\r进度("+str(s+f)+"/"+str(num)+")",end="")
-        try:
-            txturl=url+i
-            r=requests.get(txturl,headers)
-            if r.status_code==requests.codes.ok:
-                print(txturl)
-                s=s+1
-            else:
-                f=f+1
-        except:
-            f=f+1
+        t1 = threading.Thread(target=shaomiao,args=(i,))
+        t1.start()
+        
+
+
     print("总扫描"+str(s+f)+"个页面，成功检测"+str(s)+"个页面")
+    
+def shaomiao(i):
+    global s
+    global f
+    try:
+        txturl=url+i
+        r=requests.get(txturl,headers)
+        if r.status_code==requests.codes.ok:
+            print(txturl)
+            s=s+1
+        else:
+            f=f+1
+    except:
+        f=f+1
+    
 #判断模式
 if mode in ["1","获取源码"]:
     getsrc()
