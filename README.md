@@ -1,11 +1,14 @@
 # moligeek
-web集成工具,源码获取,表单提交,后台扫描......  
+web集成工具,源码获取,表单提交,后台扫描...... 
+# 下载
+    git clone https://github.com/yourmoln/moligeek 
 # 使用方法  
-1.安装python3  
-2.安装第三方python库requests  
+1.直接使用python3直接运行moligeek.py  
+2.若不存在requests库则自动安装   
+当然，你也可以手动安装，虽然没有必要
   #### 安装命令:
     pip install requests  
-3.使用python3直接运行moligeek.py即可  
+3.根据程序提示进行输入  
 # 功能：
 1.下载源码  
 2.ping  
