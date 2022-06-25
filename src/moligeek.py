@@ -2,9 +2,17 @@
 from socket import socket
 import threading
 from threading import Lock,Thread
+import time
 
-import requests
 import os
+try:
+    import requests
+except:
+    package_name = 'requests'
+    print("检测到缺乏requests库，自动安装中")
+    os.system(f'python -m pip install {package_name}')
+    import requests
+    print("安装完成，开始运行")
 from socket import gethostbyname
 
 #全局变量
@@ -81,8 +89,10 @@ def upform():
 def findadmin():
     global s
     global f
-    kind=input("请选择后台语言类型\n[1]ASP\n[2]ASPX\n[3]DIR\n[4]JSP\n[5]MDB\n[6]PHP\n默认为php\n")
-    if kind in ["1","ASP","asp"]:
+    kind=input("请选择后台语言类型\n[0]全部\n[1]ASP\n[2]ASPX\n[3]DIR\n[4]JSP\n[5]MDB\n[6]PHP\n默认为全部\n")
+    if kind in ["0","全部"]:
+        kind=1
+    elif kind in ["1","ASP","asp"]:
         kind="ASP.txt"
     elif kind in ["2","ASPX","aspx"]:
         kind="ASPX.txt"
@@ -95,35 +105,49 @@ def findadmin():
     elif kind in ["6","PHP","php"]:
         kind="PHP.txt"
     else:
-        kind="PHP.txt"
-    with open(path+"/set/"+kind,"rt",encoding='gbk') as f:
-        txt=f.read()
-    txtlist=txt.split("\n")
-    s=0
-    f=0
-    num=len(txtlist)
-    for i in txtlist:
-        print("\r进度("+str(s+f)+"/"+str(num)+")",end="")
-        t1 = threading.Thread(target=shaomiao,args=(i,))
-        t1.start()
+        kind=1
+        
+    if kind == 1:
+        kind = ["ASP.txt","ASPX.txt","DIR.txt","JSP.txt","MDB.txt","PHP.txt"]
+        for ikind in kind:
+            with open(path+"/set/"+ikind,"rt",encoding='gbk') as f:
+                txt=f.read()
+            txtlist=txt.split("\n")
+            for i in txtlist:
+                t1 = threading.Thread(target=shaomiao,args=(i,))
+                t1.start()
+    else:
+        with open(path+"/set/"+kind,"rt",encoding='gbk') as f:
+            txt=f.read()
+        txtlist=txt.split("\n")
+        #s=0
+        #f=0
+        #num=len(txtlist)
+        for i in txtlist:
+            #print("\r进度("+str(s+f)+"/"+str(num)+")",end="")
+            t1 = threading.Thread(target=shaomiao,args=(i,))
+            t1.start()
         
 
-
-    print("总扫描"+str(s+f)+"个页面，成功检测"+str(s)+"个页面")
+    
+    #print("总扫描"+str(s+f)+"个页面，成功检测"+str(s)+"个页面")
+    #time.sleep(2)
+    #print("扫描结束")
     
 def shaomiao(i):
-    global s
-    global f
+    #global s
+    #global f
     try:
         txturl=url+i
         r=requests.get(txturl,headers)
         if r.status_code==requests.codes.ok:
             print(txturl)
-            s=s+1
-        else:
-            f=f+1
+            #s=s+1
+        #else:
+            #f=f+1
     except:
-        f=f+1
+        #f=f+1
+        return 0
     
 #判断模式
 if mode in ["1","获取源码"]:
