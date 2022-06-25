@@ -8,11 +8,11 @@ web集成工具,源码获取,表单提交,后台扫描......
 # 使用方法  
 1.使用python3运行moligeek.py  
 
-    python moligeek/src/moligeek.py  
+    python moligeek/src/moligeek.py
 2.若不存在requests库则自动安装   
 当然，你也可以手动安装，虽然没有必要
   #### 安装命令:
-    pip install requests  
+    pip install requests
 3.根据程序提示进行输入  
 # 功能：
 1.下载源码  
