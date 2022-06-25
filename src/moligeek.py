@@ -4,16 +4,34 @@ import threading
 from threading import Lock,Thread
 import time
 
+print("="*45)
+name = """_ _                 _    
+ _ __ ___   ___ | (_) __ _  ___  ___| | __
+| '_ ` _ \ / _ \| | |/ _` |/ _ \/ _ \ |/ /
+| | | | | | (_) | | | (_| |  __/  __/   < 
+|_| |_| |_|\___/|_|_|\__, |\___|\___|_|\_\
+                     |___/"""
+print(name)
+print("="*45)
+print("开源地址:https://github.com/yourmoln/moligeek")
+print("本工具仅限于合法用途")
+print("="*45)
+
 import os
 try:
     import requests
 except:
     package_name = 'requests'
     print("检测到缺乏requests库，自动安装中")
-    os.system(f'python -m pip install {package_name}')
-    import requests
-    print("安装完成，开始运行")
+    try:
+        os.system(f'python -m pip install {package_name}')
+        import requests
+        print("安装完成，开始运行")
+    except:
+        print("安装失败，请尝试手动安装")
 from socket import gethostbyname
+
+
 
 #全局变量
 s=0
