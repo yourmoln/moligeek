@@ -13,6 +13,7 @@ name = """_ _                 _
                      |___/"""
 print(name)
 print("="*45)
+print("v0.1.0(测试版)")
 print("开源地址:https://github.com/yourmoln/moligeek")
 print("本工具仅限于合法用途，交流Q群:564136017")
 print("="*45)
@@ -29,6 +30,7 @@ except:
         print("\a安装完成，开始运行")
     except:
         print("\a安装失败，请尝试手动安装")
+        exit()
 from socket import gethostbyname
 
 
