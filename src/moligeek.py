@@ -22,13 +22,13 @@ try:
     import requests
 except:
     package_name = 'requests'
-    print("检测到缺乏requests库，自动安装中")
+    print("\a检测到缺乏requests库，自动安装中")
     try:
         os.system(f'python -m pip install {package_name}')
         import requests
-        print("安装完成，开始运行")
+        print("\a安装完成，开始运行")
     except:
-        print("安装失败，请尝试手动安装")
+        print("\a安装失败，请尝试手动安装")
 from socket import gethostbyname
 
 
@@ -36,7 +36,7 @@ from socket import gethostbyname
 #全局变量
 s=0
 f=0
-
+nf=0
 #获取脚本目录绝对路径
 path = os.path.split(os.path.realpath(__file__))[0]
 
@@ -71,9 +71,9 @@ def getsrc():
         srcpath=path+"/src/"+pathname+".txt"
         with open(srcpath,"w+") as f:
             f.write(response.text)
-        print("成功写入文件，文件路径:"+srcpath)
+        print("\a成功写入文件，文件路径:"+srcpath)
     except:
-        print("写入失败\n请检查网络是否正常或网页是否存在")
+        print("\a写入失败\n请检查网络是否正常或网页是否存在")
 
 
 
@@ -88,7 +88,7 @@ def getip():
     try:
         print("ip:"+gethostbyname(name))
     except:
-        print("未检测到ip\n请检查网络是否正常或域名是否正确")
+        print("\a未检测到ip\n请检查网络是否正常或域名是否正确")
 
 
 
@@ -117,7 +117,7 @@ def post():
         response.encoding="utf–8"
         print(response.text)
     except:
-        print("发送失败\n请检查网络是否正常或页面是否存在")
+        print("\a发送失败\n请检查网络是否正常或页面是否存在")
 
 def get():
     try:
@@ -125,7 +125,7 @@ def get():
         response.encoding="utf–8"
         print(response.text)
     except:
-        print("发送失败\n请检查网络是否正常或页面是否存在")
+        print("\a发送失败\n请检查网络是否正常或页面是否存在")
 
 
 
@@ -203,13 +203,15 @@ def startattack():
         n+=speed
         t1 = threading.Thread(target=attack,args=(speed,))
         t1.start()
-        print(f"\r已发送{n}个包",end="")
+        print(f"\r已发送{n}个包，失效{nf}个包",end="")
 def attack(speed):
+    global nf
     while speed>0:
         try:
-            response = requests.get(url,headers)
+            r = requests.get(url,headers)
         except:
             #print("发送失败")
+            nf+=1
             break
         speed-=1
         
