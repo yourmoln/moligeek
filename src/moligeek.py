@@ -107,23 +107,23 @@ def upform():
     for i in range(n):
         formdata[formname[i]]=formvalue[i]
     if method in ["1","post"]:
-        post()
+        post(formdata)
     elif method in ["2","get"]:
-        get()
+        get(formdata)
     else:
-        post()
+        post(formdata)
 
-def post():
+def post(data):
     try:
-        response = requests.post(url, data=formdata)
+        response = requests.post(url, data=data)
         response.encoding="utf–8"
         print(response.text)
     except:
         print("\a发送失败\n请检查网络是否正常或页面是否存在")
 
-def get():
+def get(data):
     try:
-        response = requests.get(url, params=formdata)
+        response = requests.get(url, params=data)
         response.encoding="utf–8"
         print(response.text)
     except:
