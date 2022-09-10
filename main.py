@@ -1,3 +1,7 @@
+import sys
+import os
+script_path = os.path.split(os.path.realpath(__file__))[0]
+sys.path.append(script_path)
 from moligeek import *
 
 ssl = input("是否为https://\n[1]是\n[2]否\n")
