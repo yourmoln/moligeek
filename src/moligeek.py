@@ -1,11 +1,9 @@
+# -*- coding: utf-8 -*-
 #by yourmoln
-from socket import socket
 import threading
-from threading import Lock,Thread
-import time
 
 print("="*45)
-name = """_ _                 _    
+name = r"""_ _                 _    
  _ __ ___   ___ | (_) __ _  ___  ___| | __
 | '_ ` _ \ / _ \| | |/ _` |/ _ \/ _ \ |/ /
 | | | | | | (_) | | | (_| |  __/  __/   < 
