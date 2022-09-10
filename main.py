@@ -1,5 +1,4 @@
 from moligeek import *
-from moligeek import web, zip, network
 
 ssl = input("是否为https://\n[1]是\n[2]否\n")
 if ssl in ["是", "1"]:
