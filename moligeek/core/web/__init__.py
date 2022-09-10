@@ -72,9 +72,10 @@ def upform(url):
 
 
 def findadmin(url):
-    def shaomiao(i):
+    def shaomiao(path):
+        path = path.strip()
         try:
-            txturl = url + i
+            txturl = url + path
             r = requests.get(txturl, headers)
             if r.status_code == requests.codes.ok:
                 print(txturl)
@@ -114,10 +115,6 @@ def findadmin(url):
             # print("\r进度("+str(s+f)+"/"+str(num)+")",end="")
             t1 = threading.Thread(target=shaomiao, args=(i,))
             t1.start()
-
-    # print("总扫描"+str(s+f)+"个页面，成功检测"+str(s)+"个页面")
-    # time.sleep(2)
-    # print("扫描结束")
 
 
 if __name__ == "__main__":
