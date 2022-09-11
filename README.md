@@ -1,5 +1,3 @@
-
-
 # MoliGeek
 
 一款逐渐完善的python集成工具,努力为开发者提供最大的便利
@@ -35,60 +33,84 @@
   </p>
 
 </p>
-
-
  
  
 ## 目录
 
-- [使用需求](#使用需求)
-  - [安装步骤](#安装步骤)
-  - [如何运行](#如何运行)
-- [现有功能](#现有功能)
-- [开发环境](#开发环境)
-  - [依赖](#依赖)
-- [如何参与开源项目](#如何参与开源项目)
-- [作者](#作者)
-- [版权说明](#版权说明)
-- [特别鸣谢](#特别鸣谢)
+- [MoliGeek](#moligeek)
+  - [目录](#目录)
+  - [运行环境安装](#运行环境安装)
+    - [Windows (推荐)](#windows-推荐)
+    - [Linux](#linux)
+  - [使用需求](#使用需求)
+    - [现有功能](#现有功能)
+    - [开发环境](#开发环境)
+    - [如何参与开源项目](#如何参与开源项目)
+    - [作者](#作者)
+    - [版权说明](#版权说明)
+    - [特别鸣谢](#特别鸣谢)
 
+## 运行环境安装
 
-### 使用需求
+### Windows (推荐)
 
-1. python3
+1. 可前往Python官网下载: [官网](https://www.python.org/)
+2. 如果Windows版本高于16299(Windows 10 1709)，可尝试使用Winget命令安装Python
 ```
-pkg install python
+winget install Python.Python.3.10
 ```
-或等待未来推出的Windows版本
 
-2.安装脚本
-###### **安装步骤**
+---
+
+### Linux
+
+---
+
+**Debian & Ubuntu**
+
+```
+apt install python
+```
+
+**CentOS**
+
+```
+yum install python
+```
+
+## 使用需求
+
+1. 安装脚本
+
+**安装步骤**
 
 ```
 git clone https://github.com/yourmoln/moligeek.git
 ```
 
-3.运行脚本
-###### **如何运行**
+2. 运行脚本
+
+**如何运行**
 
 ```
 python main.py
 ```
-请在项目根目录下运行该指令
+
+**请在项目根目录下运行该指令**
 
 ### 现有功能
-1.下载源码  
-2.ping  
-3.获取 ip  
-4.提交表单  
-5.后台扫描  
-6.洪水攻击  
+1. 下载源码  
+2. ping  
+3. 获取 ip  
+4. 提交表单  
+5. 后台扫描  
+6. 洪水攻击  
 
 ### 开发环境
 
 [python](https://python.org)
 
-###### 依赖
+**依赖**
 
 - 请在[requirements.txt](https://github.com/yourmoln/moligeek/blob/main/requirements.txt)查看
 - ps:脚本运行时会自动安装缺失依赖
