@@ -64,7 +64,7 @@ winget install Python.Python.3.10
 
 ### Linux
 
----
+
 
 **Debian & Ubuntu**
 
