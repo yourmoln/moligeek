@@ -33,3 +33,11 @@ for _ in range(3):
 import core.network as network
 import core.web as web
 import core.zip as zip
+
+#一言
+try:
+    response = requests.get('https://api.ixiaowai.cn/api/ylapi.php')
+    response.encoding = "utf–8"
+    meo.screen.blue_font('一言:'+response.text)
+except:
+    print("\a一言显示失败,请检查网络是否正常")
