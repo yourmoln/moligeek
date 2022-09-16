@@ -54,7 +54,7 @@
 ### Windows (推荐)
 
 1. 可前往Python官网下载: [官网](https://www.python.org/)
-2. 如果Windows版本高于16299(Windows 10 1709)，可尝试使用Winget命令安装Python
+2. 如果Windows版本高于16299(Windows 10 1709)并且软件包安装程序为最新版本，可尝试使用Winget命令安装Python
 ```
 winget install Python.Python.3.10
 ```
