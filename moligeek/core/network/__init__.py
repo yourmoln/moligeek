@@ -14,28 +14,32 @@ def ping(host):
         print("域名",host,"IP："+gethostbyname(host))
     except:
         print("Warning: 当前域名检测不到IP可能无法进行进行Ping")
-    times = 0
-    i = 0
-    answer = input("请选择Ping的模式:\n[1] 仅Ping一次\n[2] 指定Ping的次数\n[3] 无限Ping\n")
-    if answer in ["1", "仅Ping一次"]:
+
+    if os.name == "nt": #判断系统版本
+        times = 0
+        i = 0
+        answer = input("请选择Ping的模式:\n[1] 仅Ping一次\n[2] 指定Ping的次数\n[3] 无限Ping\n")
+        if answer in ["1", "仅Ping一次"]:
+            os.system("ping "+ host)
+        elif answer in ["2", "指定Ping的次数"]:
+            try:
+                times = int(input("请指定Ping的次数 "))
+            except:
+                print("转换类型失败，默认5次")
+                times = 5
+            if times <= 0:
+                print("数据错误，已恢复成5次")
+                times = 5
+            else:
+                pass
+            while i < times:
+                os.system("ping "+ host)
+                i += 1
+        elif answer in ["3", "无限Ping"]:
+            while True:
+                os.system("ping "+ host)
+    else:
         os.system("ping "+ host)
-    elif answer in ["2", "指定Ping的次数"]:
-        try:
-            times = int(input("请指定Ping的次数 "))
-        except:
-            print("转换类型失败，默认5次")
-            times = 5
-        if times <= 0:
-            print("数据错误，已恢复成5次")
-            times = 5
-        else:
-            pass
-        while i < times:
-            os.system("ping "+ host)
-            i += 1
-    elif answer in ["3", "无限Ping"]:
-        while True:
-            os.system("ping "+ host)
 
 # 获取ip
 def getip(name):
