@@ -1,5 +1,6 @@
 import sys
 import os
+from socket import gethostbyname
 script_path = os.path.split(os.path.realpath(__file__))[0]
 sys.path.append(script_path)
 from moligeek import *
@@ -14,6 +15,12 @@ else:
     ssl = "https://"
 name = input("请输入链接:"+ssl)
 url = ssl+name
+
+try:
+    print("域名",name,"IP："+gethostbyname(name)+"(仅供参考)")
+except:
+    print("Warning: 当前域名检测不到IP可能无法进行进行操作")
+
 mode = input("请选择模式:\n[1]下载源码\n[2]ping\n[3]获取ip\n[4]提交表单\n[5]后台扫描\n[6]洪水攻击\n")
 
 

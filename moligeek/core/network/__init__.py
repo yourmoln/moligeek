@@ -10,11 +10,6 @@ headers = {
 
 # ping
 def ping(host):
-    try:
-        print("域名",host,"IP："+gethostbyname(host))
-    except:
-        print("Warning: 当前域名检测不到IP可能无法进行进行Ping")
-
     if os.name == "nt": #判断系统版本
         times = 0
         i = 0
