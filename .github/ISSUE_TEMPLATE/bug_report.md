@@ -1,7 +1,7 @@
 ---
 name: "Bug反馈\U0001F605"
 about: 发现了Bug？火速提交Issus！
-title: "[Bug]我发现一个新的Bug"
+title: "[Bug]我发现一个新的Bug:"
 labels: bug
 assignees: ''
 

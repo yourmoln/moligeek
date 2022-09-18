@@ -1,7 +1,7 @@
 ---
 name: "功能建议\U0001F44D"
 about: "欢迎提交新的功能建议！\U0001F60D"
-title: "[Feature Request]我有一个新的功能建议"
+title: "[Feature Request]我有一个新的功能建议:"
 labels: help wanted
 assignees: ''
 
