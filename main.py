@@ -14,7 +14,7 @@ else:
     ssl = "https://"
 name = input("请输入链接:"+ssl)
 url = ssl+name
-mode = input("请选择模式:\n(1)下载源码\n(2)ping\n(3)获取ip\n(4)提交表单\n(5)后台扫描\n(6)洪水攻击\n")
+mode = input("请选择模式:\n[1]下载源码\n[2]ping\n[3]获取ip\n[4]提交表单\n[5]后台扫描\n[6]洪水攻击\n")
 
 
 # 判断模式
