@@ -8,6 +8,8 @@ script_path = os.path.split(os.path.realpath(__file__))[0]
 sys.path.append(os.path.join(script_path, "../../"))
 import path_dict
 
+from .imitate import Imitate
+
 HOST_PATTERN = r".+://(.+)"
 headers = {
     "User-Agent": meo.net.UserAgent.FIREFOX.value
