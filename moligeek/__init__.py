@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 # by yourmoln
-import socket,json
-from urllib.request import urlopen
 
 import sys
 import os
@@ -38,27 +36,10 @@ import core.network as network
 import core.web as web
 import core.zip as zip
 
-def getip():
-    try:
-        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-        address = ("8.8.8.8", 80)
-        s.connect(address)
-        sockname = s.getsockname()
-        ip = sockname[0]
-        port = sockname[1]
-    finally:
-        s.close()
-    return ip
-def getoutip():
-    try:
-        return json.load(urlopen('http://jsonip.com'))['ip']
-    except:
-        return "未获取到公网IP"
 
 #检查网络，一言
 print("检查网络中......")
 try:
-    print("公网: %s 内网: %s"%(getoutip(),getip()))
     response = requests.get('https://api.ixiaowai.cn/api/ylapi.php')
     response.encoding = "utf–8"
     meo.screen.blue_font('一言:'+response.text)

@@ -16,7 +16,7 @@ class Download(threading.Thread):
         except:
             return False
 
-    def __init___(self):
+    def __init__(self):
         super(Download, self).__init__()
         self.path = ''
         self.url = ''

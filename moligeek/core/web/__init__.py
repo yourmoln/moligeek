@@ -8,6 +8,7 @@ script_path = os.path.split(os.path.realpath(__file__))[0]
 sys.path.append(os.path.join(script_path, "../../"))
 import path_dict
 
+#仿站
 from .imitate import Imitate
 
 HOST_PATTERN = r".+://(.+)"
@@ -50,8 +51,6 @@ def get(url, data):
         print("\a发送失败\n请检查网络是否正常或页面是否存在")
 
 # 提交表单
-
-
 def upform(url):
     formname = []
     formvalue = []
@@ -71,8 +70,6 @@ def upform(url):
         post(url, formdata)
 
 # 后台文件扫描
-
-
 def findadmin(url):
     def shaomiao(path):
         path = path.strip()

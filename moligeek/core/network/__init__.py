@@ -4,6 +4,9 @@ headers = {
     "User-Agent": meo.net.UserAgent.FIREFOX.value
 }
 
+#本机信息
+from .hostinfo import hostinfo
+
 # ping
 def ping(host):
     if os.name == "nt": #判断系统版本
@@ -69,7 +72,7 @@ def startattack(url, headers=headers):
             collector['err']
         ), end="")
 
-# ddos
+# 泛洪攻击
 def ddos_attack(ip):
     sent = 0
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)

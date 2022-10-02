@@ -4,8 +4,10 @@ script_path = os.path.split(os.path.realpath(__file__))[0]
 sys.path.append(script_path)
 from moligeek import *
 
-mainmode = input("请选择模式:\n[1]web\n[2]network\n")
-if mainmode in ["1", "web"]:
+mainmode = input("请选择模式:\n[0]本机信息\n[1]web\n[2]network\n")
+if mainmode in ["0", "本机信息"]:
+    hostinfo = network.hostinfo()
+elif mainmode in ["1", "web"]:
     ssl = input("是否为https://\n[1]是\n[2]否\n")
     if ssl in ["是", "1"]:
         ssl = "https://"
@@ -29,11 +31,11 @@ if mainmode in ["1", "web"]:
     if mode in ["5", "洪水攻击"]:
         network.startattack(url)
         
-if mainmode in ["2", "network"]:
+elif mainmode in ["2", "network"]:
     target_ip = input("请输入目标ip:")
-    mode = input("请选择模式:\n[1]ddos\n[2]ping\n")
+    mode = input("请选择模式:\n[1]泛洪攻击\n[2]ping\n")
 
-    if mode in ["1", "ddos"]:
+    if mode in ["1", "泛洪攻击"]:
         network.ddos_attack(target_ip)
     if mode in ["2", "ping"]:
         network.ping(target_ip)
