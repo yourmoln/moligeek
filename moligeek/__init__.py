@@ -15,6 +15,7 @@ for _ in range(3):
     try:
         import requests
         import meo
+        import bs4
         break
     except:
         source_list = [
