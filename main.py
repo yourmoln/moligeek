@@ -4,7 +4,7 @@ script_path = os.path.split(os.path.realpath(__file__))[0]
 sys.path.append(script_path)
 from moligeek import *
 
-mainmode = input("请选择模式:\n[0]本机信息\n[1]web\n[2]network\n")
+mainmode = input("请选择模式:\n[0]本机信息\n[1]web\n[2]network\n[3]密文处理\n")
 if mainmode in ["0", "本机信息"]:
     hostinfo = network.hostinfo()
 elif mainmode in ["1", "web"]:
@@ -39,3 +39,12 @@ elif mainmode in ["2", "network"]:
         network.ddos_attack(target_ip)
     if mode in ["2", "ping"]:
         network.ping(target_ip)
+
+elif mainmode in ["3", "密文处理"]:
+    codetext = input("请输入文本:")
+    mode = input("请选择模式:\n[1]一键解密\n[2]栅栏解密\n")
+    if mode in ["1", "一键解密"]:
+        encode = encode.todecode(codetext)
+    if mode in ["2", "栅栏解密"]:
+        textlengh = int(input("每组字数:"))
+        dencode = encode.derail(codetext,textlengh)

@@ -35,6 +35,7 @@ for _ in range(3):
 import core.network as network
 import core.web as web
 import core.zip as zip
+import core.encode as encode
 
 
 #检查网络，一言
