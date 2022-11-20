@@ -1,3 +1,4 @@
 requests
 meo
 bs4
+pywifi
