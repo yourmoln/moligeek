@@ -67,13 +67,13 @@ winget install Python.Python.3.10
 
 **Debian & Ubuntu**
 
-```
+```sh
 apt install python
 ```
 
 **CentOS**
 
-```
+```sh
 yum install python
 ```
 
@@ -83,7 +83,7 @@ yum install python
 
 **安装步骤**
 
-```
+```sh
 git clone https://github.com/yourmoln/moligeek.git
 ```
 
@@ -91,8 +91,8 @@ git clone https://github.com/yourmoln/moligeek.git
 
 **如何运行**
 
-```
-python main.py
+```sh
+python ./moligeek/main.py
 ```
 
 **请在项目根目录下运行该指令**
