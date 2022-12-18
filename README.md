@@ -63,7 +63,11 @@ git clone https://github.com/yourmoln/moligeek.git
 ```
 python ./moligeek/main.py
 ```
-
+3.若安装过程出现意外，请使用以下指令换源后重新尝试以上指令
+```
+sed -i 's@^\(deb.*stable main\)$@#\1\ndeb https://mirrors.tuna.tsinghua.edu.cn/termux/apt/termux-main stable main@' $PREFIX/etc/apt/sources.list
+apt update && apt upgrade
+```
 ### Windows
 0. 在本仓库的[releases](https://github.com/yourmoln/moligeek/releases)下载windows版本的moligeek（推荐），或者选择以下做法进行安装
 1. 可前往Python官网下载: [官网](https://www.python.org/)
