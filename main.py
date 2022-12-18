@@ -48,3 +48,6 @@ elif mainmode in ["3", "密文处理"]:
     if mode in ["2", "栅栏解密"]:
         textlengh = int(input("每组字数:"))
         dencode = encode.derail(codetext,textlengh)
+
+if os.name == "nt":
+    input("按任意键结束程序")
