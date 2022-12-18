@@ -38,11 +38,11 @@ import core.zip as zip
 import core.encode as encode
 
 
-#检查网络，一言
-print("检查网络中......")
-try:
-    response = requests.get('https://api.ixiaowai.cn/api/ylapi.php')
-    response.encoding = "utf–8"
-    meo.screen.blue_font('一言:'+response.text)
-except:
-    meo.screen.red_font("\a网络异常,请检查网络是否连接,若你的网络没有问题，请忽略此提示")
+# #检查网络，一言
+# print("检查网络中......")
+# try:
+#     response = requests.get('https://api.ixiaowai.cn/api/ylapi.php')
+#     response.encoding = "utf–8"
+#     meo.screen.blue_font('一言:'+response.text)
+# except:
+#     meo.screen.red_font("\a网络异常,请检查网络是否连接,若你的网络没有问题，请忽略此提示")
