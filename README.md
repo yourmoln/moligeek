@@ -39,7 +39,8 @@
 <h2>目录</h2>
 
 - [运行环境安装](#运行环境安装)
-  - [Windows (推荐)](#windows-推荐)
+  - [Termux](#termux)
+  - [Windows](#windows)
   - [Linux](#linux)
 - [使用需求](#使用需求)
   - [现有功能](#现有功能)
@@ -50,6 +51,18 @@
   - [特别鸣谢](#特别鸣谢)
 
 ## 运行环境安装
+
+### Termux
+1.Termux可依次运行以下指令进行安装
+```
+apt install python
+apt install git
+git clone https://github.com/yourmoln/moligeek.git
+```
+2.安装完成后可用以下指令运行
+```
+python ./moligeek/main.py
+```
 
 ### Windows
 0. 在本仓库的[releases](https://github.com/yourmoln/moligeek/releases)下载windows版本的moligeek（推荐），或者选择以下做法进行安装
