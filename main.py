@@ -4,7 +4,7 @@ script_path = os.path.split(os.path.realpath(__file__))[0]
 sys.path.append(script_path)
 from moligeek import *
 
-mainmode = input("请选择模式:\n[0]本机信息\n[1]web\n[2]network\n[3]密文处理\n")
+mainmode = input("请选择模式:\n[0]本机信息\n[1]web\n[2]network\n[3]LAN\n[4]密文处理\n")
 if mainmode in ["0", "本机信息"]:
     hostinfo = network.hostinfo()
 elif mainmode in ["1", "web"]:
@@ -40,7 +40,15 @@ elif mainmode in ["2", "network"]:
     if mode in ["2", "ping"]:
         network.ping(target_ip)
 
-elif mainmode in ["3", "密文处理"]:
+elif mainmode in ["3", "LAN"]:
+    mode = input("请选择模式:\n[1]设备扫描\n")
+
+    if mode in ["1", "设备扫描"]:
+        range = input("请输入扫描范围\n例:192.168.1\n")
+        print("扫描中...")
+        scan = LAN.scan(range)
+
+elif mainmode in ["4", "密文处理"]:
     codetext = input("请输入文本:")
     mode = input("请选择模式:\n[1]一键解密\n[2]栅栏解密\n")
     if mode in ["1", "一键解密"]:
