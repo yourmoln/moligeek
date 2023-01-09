@@ -7,6 +7,8 @@ script_path = os.path.split(os.path.realpath(__file__))[0]
 sys.path.append(script_path)
 import path_dict
 import core
+import random
+import pickle
 print(core.__docs__)
 
 for _ in range(3):
@@ -38,12 +40,6 @@ import core.zip as zip
 import core.encode as encode
 import core.LAN as LAN
 
-
-# #检查网络，一言
-# print("检查网络中......")
-# try:
-#     response = requests.get('https://api.ixiaowai.cn/api/ylapi.php')
-#     response.encoding = "utf–8"
-#     meo.screen.blue_font('一言:'+response.text)
-# except:
-#     meo.screen.red_font("\a网络异常,请检查网络是否连接,若你的网络没有问题，请忽略此提示")
+with open(os.path.join(script_path, "./assets/YiYan.dat"), "rb") as f:
+    YiYans = pickle.loads(f.read())
+meo.screen.blue_font('一言:'+YiYans[str(random.randint(1, 2428))])
