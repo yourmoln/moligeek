@@ -58,4 +58,4 @@ elif mainmode in ["4", "密文处理"]:
         print(encode.fence.decrypt(codetext, textlengh))
 
 if os.name == "nt":
-    input("按任意键结束程序")
+    input("按回车键结束程序")
