@@ -55,7 +55,7 @@ elif mainmode in ["4", "密文处理"]:
         encode = encode.todecode(codetext)
     if mode in ["2", "栅栏解密"]:
         textlengh = int(input("每组字数:"))
-        dencode = encode.derail(codetext,textlengh)
+        print(encode.fence.decrypt(codetext, textlengh))
 
 if os.name == "nt":
     input("按任意键结束程序")
