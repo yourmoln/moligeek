@@ -6,6 +6,16 @@ class todecode:
             return base64.b64decode(text.encode("utf-8")).decode("utf-8")
         except:
             return
+    def base32(self,text):
+        try:
+            return base64.b32decode(text.encode("utf-8")).decode("utf-8")
+        except:
+            return
+    def base16(self,text):
+        try:
+            return base64.b16decode(text.encode("utf-8")).decode("utf-8")
+        except:
+            return
     def url(self,text):
         try:
             return urllib.parse.unquote(text)
@@ -18,6 +28,8 @@ class todecode:
             return
     def __init__(self,text):
         print("base64:",self.base64(text))
+        print("base32:",self.base32(text))
+        print("base16:",self.base16(text))
         print("URL:",self.url(text))
         print("unicode:",self.unicode(text))
 
@@ -31,5 +43,5 @@ class derail:
         print(self.decode_rail_fence_cipher(text,lengh))
 
 if __name__ == "__main__":
-    #a = todecode("5L2g5aW9")
+    a = todecode("5L2g5aW9")
     a = derail("123456",5)
