@@ -40,6 +40,6 @@ import core.zip as zip
 import core.encode as encode
 import core.LAN as LAN
 
-with open(os.path.join(script_path, "./assets/YiYan.dat"), "rb") as f:
+with open(os.path.join(script_path, "./database/YiYan.dat"), "rb") as f:
     YiYans = pickle.loads(f.read())
-meo.screen.blue_font('一言:'+YiYans[str(random.randint(1, 2428))])
+meo.screen.blue_font('一言:'+YiYans[str(random.randint(1, len(YiYans)))])
