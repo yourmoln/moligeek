@@ -57,7 +57,7 @@ elif mainmode in ["4", "密文处理"]:
         textlengh = int(input("每组字数:"))
         print(encode.fence.decrypt(codetext, textlengh))
     elif mode in ["3", "替代密码"]:
-        encode.Substitution.Asked(codetext)
+        encode.Substitution.Decrypt(codetext)
 
 if os.name == "nt":
     os.system("pause")
