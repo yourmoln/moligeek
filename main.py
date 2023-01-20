@@ -50,12 +50,16 @@ elif mainmode in ["3", "LAN"]:
 
 elif mainmode in ["4", "密文处理"]:
     codetext = input("请输入文本:")
-    mode = input("请选择模式:\n[1]一键解密\n[2]栅栏解密\n")
+    mode = input("请选择模式:\n[1]一键解密\n[2]栅栏解密\n[3]替代密码\n")
     if mode in ["1", "一键解密"]:
         encode = encode.todecode(codetext)
-    if mode in ["2", "栅栏解密"]:
+    elif mode in ["2", "栅栏解密"]:
         textlengh = int(input("每组字数:"))
         print(encode.fence.decrypt(codetext, textlengh))
+    elif mode in ["3", "替代密码"]:
+        encode.Substitution.Asked(codetext)
 
 if os.name == "nt":
-    input("按回车键结束程序")
+    os.system("pause")
+else:
+    input("按回车键结束")
