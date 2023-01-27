@@ -33,11 +33,13 @@ elif mainmode in ["1", "web"]:
         
 elif mainmode in ["2", "network"]:
     target_ip = input("请输入目标ip:")
-    mode = input("请选择模式:\n[1]泛洪攻击\n[2]ping\n")
+    mode = input("请选择模式:\n[1]泛洪攻击\n[2]ping\n[3]洪攻击\n")
 
     if mode in ["1", "泛洪攻击"]:
         network.ddos_attack(target_ip)
     if mode in ["2", "ping"]:
+        network.ping(target_ip)
+    if mode in ["3", "洪攻击"]:
         network.ping(target_ip)
 
 elif mainmode in ["3", "LAN"]:
