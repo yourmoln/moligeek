@@ -1,5 +1,5 @@
 requests
 meo
-bs4
+beautifulsoup4
 pywifi
 Technology-Note
