@@ -4,7 +4,7 @@ script_path = os.path.split(os.path.realpath(__file__))[0]
 sys.path.append(script_path)
 from moligeek import *
 
-mainmode = input("请选择模式:\n[0]本机信息\n[1]web\n[2]network\n[3]LAN\n[4]密文处理\n[5]压缩包破解")
+mainmode = input("请选择模式:\n[0]本机信息\n[1]web\n[2]network\n[3]LAN\n[4]密文处理\n[5]压缩包破解\n")
 if mainmode in ["0", "本机信息"]:
     hostinfo = network.hostinfo()
 elif mainmode in ["1", "web"]:
