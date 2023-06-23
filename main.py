@@ -61,9 +61,11 @@ elif mainmode in ["4", "密文处理"]:
 
 elif mainmode in ["5", "压缩包破解"]:
     zip_path = input("请输入压缩包路径:")
-    mode = input("请选择模式:\n[1]纯数字破解\n")
-    if mode in ["1", "一键解密"]:
+    mode = input("请选择破解模式:\n[1]纯数字\n[2]数字字母混合\n")
+    if mode in ["1", "纯数字"]:
         zip.zipkey(zip_path)
-        print(f"若解压成功,则解压文件位于{script_path}\\zipout")
+    if mode in ["2", "数字字母混合"]:
+        zip.zipkey_plus(zip_path)
+    print(f"若解压成功,则解压文件位于{script_path}\\zipout")
 if os.name == "nt":
     input("按回车键结束程序")
