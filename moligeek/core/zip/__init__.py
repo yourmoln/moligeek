@@ -3,8 +3,10 @@ import time
 import asyncio
 from tqdm.asyncio import tqdm
 from itertools import permutations
+import multiprocessing
+import itertools
 
-PERMUTE = b"1234567890qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM!@#$%^&*()_+-=[{}]\|;:,<.>/?'\" "
+PWD_SEED = b"1234567890qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM!@#$%^&*()_+-=[{}]\|;:,<.>/?'\" "
 
 def try_open_zip(file, pwd):
     assert isinstance(file, zipfile.ZipFile)
@@ -18,7 +20,7 @@ def try_open_zip(file, pwd):
     except:
         return False
     
-def zipkey(file):
+def guess_number_pwd(file):
     start_time = time.time()
     zfile = zipfile.ZipFile(file)
     print("开始爆破(纯数字)")
@@ -27,22 +29,26 @@ def zipkey(file):
             print("破解成功，压缩包密码为 %s ,用时 %s s"%(number,int(time.time()-start_time)))
             break
 
-def key_generator(start=None, end=None):
+def key_permution(seed, size):
+    for k in permutations(seed, size):
+        yield bytes(k)
+
+def key_generator(start=None, end=None, seed=PWD_SEED):
     n_size = 0 if start is None else int(start)
     if end is None:
         while True:
             n_size += 1
-            for k in permutations(PERMUTE, n_size):
-                yield bytes(k), n_size
+            for k in key_permution(PWD_SEED, n_size):
+                yield k, n_size
     else:
         end = int(end)
         while True:
             n_size += 1
             if n_size <= end:
-                for k in permutations(PERMUTE, n_size):
-                    yield bytes(k), n_size
+                for k in key_permution(PWD_SEED, n_size):
+                    yield k, n_size
 
-def zipkey_plus(file, min_length=None, max_length=None):
+def guess_pwd(file, min_length=None, max_length=None):
     start_time = time.time()
     zfile = zipfile.ZipFile(file)
 
@@ -53,21 +59,9 @@ def zipkey_plus(file, min_length=None, max_length=None):
 
     async def generator():
         with tqdm(key_generator(min_length, max_length)) as bar:
-            # queue = []
-            # max_q_size, q_size = 10000, 0
-            # last_size = -1
             async for pwd, n_size in bar:
                 if await block(pwd):
                     return pwd
-                # if q_size >= max_q_size:
-                #     res = await asyncio.gather(*queue)
-                #     for p in set(res):
-                #         if p:
-                #             return p
-                #     queue = []
-                #     q_size = 0
-                # queue.append(block(pwd))
-                # q_size += 1
         return None
     loop = asyncio.get_event_loop()
     future = asyncio.ensure_future(generator())
@@ -79,7 +73,43 @@ def zipkey_plus(file, min_length=None, max_length=None):
         print("破解失败！")
     return pwd
 
+def __block(file, pwds):
+    zfile = zipfile.ZipFile(file)
+    for pwd, _ in pwds:
+        if try_open_zip(zfile, pwd):
+            return pwd
+    return False
+
+
+def guess_in_crazy_mode(file, min_length=None, max_length=None, n_processes=8, slice_size=500):
+    pool = multiprocessing.Pool(n_processes)
+    it = key_generator(min_length, max_length)
+    manager = multiprocessing.Manager()
+    info = manager.dict()
+    info['key'] = None
+
+    def cb(re):
+        if re:
+            info['key'] = re
+            pool.terminate()
+
+    while True:
+        for _ in range(n_processes):
+            try:
+                pwds = itertools.islice(it, 0, slice_size)
+                pool.apply_async(__block, (file, list(pwds)), callback=cb)
+            except Exception as e:
+                if e.args[0] == 'Pool not running':
+                    return info['key']
+                else:
+                    raise e
+    
 if __name__ == "__main__":
     # zipkey_plus(r"C:\Users\yourm\Desktop\1\flag.zip")
-    zipkey_plus("./test/flag.zip")
+    # guess_pwd("./test/flag.zip")
+    st = time.time()
+    k = guess_in_crazy_mode("./test/flag.zip")
+    print(k)
+    ed = time.time()
+    print(ed - st)
     ...
