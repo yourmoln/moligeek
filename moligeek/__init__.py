@@ -17,6 +17,7 @@ for _ in range(3):
         import bs4
         import pywifi
         import tqdm
+        import asyncio
         break
     except:
         source_list = [
