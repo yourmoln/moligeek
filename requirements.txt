@@ -2,5 +2,3 @@ requests
 meo
 beautifulsoup4
 pywifi
-Technology-Note
-tqdm
