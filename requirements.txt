@@ -4,3 +4,4 @@ beautifulsoup4
 pywifi
 comtypes
 tqdm
+asyncio

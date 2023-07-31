@@ -1,4 +1,4 @@
-__version__ = "0.6.3 beta"
+__version__ = "0.6.4 beta"
 __url__     = "https://github.com/yourmoln/moligeek"
 __docs__ = rf"""=============================================
                  _ _                 _     
