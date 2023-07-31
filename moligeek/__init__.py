@@ -18,6 +18,7 @@ for _ in range(3):
         import bs4
         import comtypes
         import pywifi
+        import tqdm
         break
     except:
         source_list = [
