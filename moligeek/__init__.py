@@ -10,7 +10,7 @@ import core
 import random
 import pickle
 print(core.__docs__)
-
+requirements_path = os.path.join(script_path, "../requirements.txt")
 for _ in range(3):
     try:
         import requests
@@ -28,7 +28,7 @@ for _ in range(3):
             for i, source in enumerate(source_list)
         ]))
         idx = int(input("请输入序号(推荐使用1): ")) - 1
-        requirements_path = os.path.join(script_path, "../requirements.txt")
+        #requirements_path = os.path.join(script_path, "../requirements.txt")
         os.system(
             f"python -m pip install -r {requirements_path} -i {source_list[idx]}"
         )

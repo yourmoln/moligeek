@@ -6,8 +6,8 @@ from itertools import permutations
 import multiprocessing
 import itertools
 
-PWD_SEED = b"1234567890qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM!@#$%^&*()_+-=[{}]\|;:,<.>/?'\" "
-
+#PWD_SEED = b"1234567890qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM!@#$%^&*()_+-=[{}]\|;:,<.>/?'\" "
+PWD_SEED = ""
 def try_open_zip(file, pwd):
     assert isinstance(file, zipfile.ZipFile)
     try:
@@ -122,15 +122,29 @@ class ZipPasswordGuesser:
     def guess_mp(self, min_length=None, max_length=None, n_processes=8, slice_size=500):
         return guess_in_multiprocess(self.path, min_length, max_length, n_processes, slice_size)
 
-
+def zipkey(path,mode):
+    global PWD_SEED
+    if mode in ["number",0]:
+        PWD_SEED = b"1234567890"
+    elif mode in ["letter + number",1]:
+        PWD_SEED = b"1234567890qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM"
+    elif mode in ["letter + number + symbol",2]:
+        PWD_SEED = b"1234567890qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM!@#$%^&*()_+-=[{}]\|;:,<.>/?'\" "
+    st = time.time()
+    zp = ZipPasswordGuesser(path)
+    k = zp.guess_mp(n_processes=16, slice_size=1000)
+    #k = zp.guess_normal()
+    ed = time.time()
+    print(f"密码为{k.decode('utf8')},总计用时{int((ed - st)*10)/10}s")
 if __name__ == "__main__":
     # zipkey_plus(r"C:\Users\yourm\Desktop\1\flag.zip")
     # guess_pwd("./test/flag.zip")
-    st = time.time()
-    zp = ZipPasswordGuesser("./test/flag.zip")
-    k = zp.guess_mp(n_processes=16, slice_size=1000)
+    # st = time.time()
+    # zp = ZipPasswordGuesser("./test/flag.zip")
+    # k = zp.guess_mp(n_processes=16, slice_size=1000)
     # k = zp.guess_normal()
-    print(k)
-    ed = time.time()
-    print(ed - st)
+    # print(k)
+    # ed = time.time()
+    # print(ed - st)
+    zipkey(r"C:\Users\yourm\Desktop\1\flag.zip",1)
     ...
