@@ -16,6 +16,7 @@ for _ in range(3):
         import requests
         import meo
         import bs4
+        import pywifi
         break
     except:
         source_list = [
