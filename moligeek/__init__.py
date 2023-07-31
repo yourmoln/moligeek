@@ -5,7 +5,6 @@ import sys
 import os
 script_path = os.path.split(os.path.realpath(__file__))[0]
 sys.path.append(script_path)
-import path_dict
 import core
 import random
 import pickle
@@ -16,7 +15,6 @@ for _ in range(3):
         import requests
         import meo
         import bs4
-        import comtypes
         import pywifi
         import tqdm
         break
@@ -42,7 +40,6 @@ import core.web as web
 import core.zip as zip
 import core.encode as encode
 import core.LAN as LAN
-import core.zip as zip
 
 with open(os.path.join(script_path, "./database/YiYan.dat"), "rb") as f:
     YiYans = pickle.loads(f.read())

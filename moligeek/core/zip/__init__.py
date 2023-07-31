@@ -1,7 +1,7 @@
 import zipfile
 import time
 import asyncio
-from tqdm.asyncio import tqdm
+from tqdm import tqdm
 from itertools import permutations
 import multiprocessing
 import itertools
