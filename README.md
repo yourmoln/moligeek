@@ -16,7 +16,7 @@
 
 <p align="center">
   <a href="https://github.com/yourmoln/moligeek">
-    <img src="https://molick.top/photo/heita_100x100.png" alt="Logo">
+    <img src="https://raw.githubusercontent.com/yourmoln/moligeek/main/logo.ico" alt="Logo">
   </a>
 
   <h3 align="center">moligeek</h3>
