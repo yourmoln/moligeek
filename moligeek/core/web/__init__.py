@@ -37,52 +37,41 @@ def post(url, data):
     try:
         response = requests.post(url, data=data)
         response.encoding = "utf-8"
-        print(response.text)
+        return response.text
     except:
-        print("\a发送失败\n请检查网络是否正常或页面是否存在")
+        return None
 
 
 def get(url, data):
     try:
         response = requests.get(url, params=data)
         response.encoding = "utf-8"
-        print(response.text)
+        return response.text
     except:
-        print("\a发送失败\n请检查网络是否正常或页面是否存在")
+        return None
 
 # 提交表单
-def upform(url):
-    formname = []
-    formvalue = []
-    formdata = {}
-    method = input("请选择方法:\n[1]post\n[2]get\n不作选择默认为post\n")
-    n = int(input("请选择提交数量:"))
-    for i in range(n):
-        formname += [input("请输入第"+str(i+1)+"个变量名:")]
-        formvalue += [input("请输入第"+str(i+1)+"个变量值:")]
-    for i in range(n):
-        formdata[formname[i]] = formvalue[i]
+def upform(url,method = 'get',formdata = None):
     if method in ["1", "post"]:
-        post(url, formdata)
+        return post(url, formdata)
     elif method in ["2", "get"]:
-        get(url, formdata)
+        return get(url, formdata)
     else:
-        post(url, formdata)
+        return None
 
 # 后台文件扫描
-def findadmin(url):
-    def shaomiao(path):
+def findadmin(url,kind = 1):
+    up_list = []
+    def scan(path):
         path = path.strip()
         try:
             txturl = url + path
             r = requests.get(txturl, headers)
             if r.status_code == requests.codes.ok:
-                print(txturl)
+                up_list.append(txturl)
         except:
             return 0
 
-    kind = input(
-        "请选择后台语言类型\n[0]全部\n[1]ASP\n[2]ASPX\n[3]DIR\n[4]JSP\n[5]MDB\n[6]PHP\n默认为全部\n")
     if kind in ["0", "全部"]:
         kind = 1
     elif kind in ["1", "ASP", "asp"]:
@@ -99,23 +88,27 @@ def findadmin(url):
         kind = "PHP.txt"
     else:
         kind = 1
-
+    # Create a list of threads
+    threads = []
     if kind == 1:
         kind = ["ASP.txt", "ASPX.txt", "DIR.txt",
                 "JSP.txt", "MDB.txt", "PHP.txt"]
         for ikind in kind:
             txtlist = path_dict.get_file(ikind)
             for i in tqdm(txtlist):
-                t1 = threading.Thread(target=shaomiao, args=(i,))
-                t1.start()
+                t = threading.Thread(target=scan, args=(i,))
+                threads.append(t)
+                t.start()
     else:
         txtlist = path_dict.get_file(kind)
         for i in tqdm(txtlist):
             # print("\r进度("+str(s+f)+"/"+str(num)+")",end="")
-            t1 = threading.Thread(target=shaomiao, args=(i,))
-            t1.start()
-
-
+            t = threading.Thread(target=scan, args=(i,))
+            threads.append(t)
+            t.start()
+    for t in threads:
+        t.join()
+    return up_list
 if __name__ == "__main__":
     getsrc(
         "https://miaobuao.github.io/"

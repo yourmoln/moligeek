@@ -11,7 +11,6 @@ class scan:
 
                 if "ttl" in response.lower():
                     self.ip_list.append(address)
-                    #print(address, 'is up!')
         else:
             def scan_device(ip):
                 address = ip
@@ -19,7 +18,6 @@ class scan:
 
                 if "ttl" in response.lower():
                     self.ip_list.append(address)
-                    print(address, 'is up!')
         self.ping = scan_device
     def run(self):
         # Create a list of threads

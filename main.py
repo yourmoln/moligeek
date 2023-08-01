@@ -35,9 +35,23 @@ if __name__ =='__main__':
         if mode in ["2", "获取ip"]:
             print(f"ip:{network.getip(name)}")
         if mode in ["3", "提交表单"]:
-            web.upform(url)
+            formname = formvalue = []
+            formdata = {}
+            method = input("请选择方法:\n[1]post\n[2]get\n不作选择默认为post\n")
+            n = int(input("请选择提交数量:"))
+            for i in range(n):
+                formname += [input("请输入第"+str(i+1)+"个变量名:")]
+                formvalue += [input("请输入第"+str(i+1)+"个变量值:")]
+            for i in range(n):
+                formdata[formname[i]] = formvalue[i]
+            result = web.upform(url,method = method,formdata = formdata)
+            print(result) if result != None else print("提交失败")
         if mode in ["4", "后台扫描"]:
-            web.findadmin(url)
+            kind = input("请选择后台语言类型\n[0]全部\n[1]ASP\n[2]ASPX\n[3]DIR\n[4]JSP\n[5]MDB\n[6]PHP\n默认为全部\n")
+            print("扫描中，将在扫描结束后显示结果")
+            result = web.findadmin(url, kind = kind)
+            for i in result:
+                print(i)
         if mode in ["5", "洪水攻击"]:
             try:
                 speed = int(input("请输入攻击速度(小心卡死自己):"))
