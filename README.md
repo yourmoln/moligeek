@@ -23,7 +23,7 @@
   <p align="center">
     打造最完善的python工具!
     <br />
-    <a href="https://github.com/yourmoln/moligeek"><strong>探索本项目的文档 »</strong></a>
+    <a href="https://github.com/yourmoln/moligeek#%E7%9B%AE%E5%BD%95"><strong>探索本项目的文档 »</strong></a>
     <br />
     <br />
     <a href="https://www.bilibili.com/video/BV1vG411P79B/">查看Demo</a>
