@@ -4,6 +4,7 @@ import requests
 import threading
 import sys
 import os
+from tqdm import tqdm
 script_path = os.path.split(os.path.realpath(__file__))[0]
 sys.path.append(os.path.join(script_path, "../../"))
 import path_dict
@@ -22,21 +23,20 @@ def getsrc(url, output=None, headers=headers):
     host = host_match.group(1)
     try:
         response = requests.get(url, headers)
-        response.encoding = "utf–8"
-        print(response.text)
+        response.encoding = "utf-8"
         fname = host.replace("/", "_")
         if output is None:
             output = f"./output/{fname}"
         meo.to_file(output, response.text)
-        print("\a成功写入文件，文件路径:"+output)
+        return output
     except:
-        print("\a写入失败\n请检查网络是否正常或网页是否存在")
+        return None
 
 
 def post(url, data):
     try:
         response = requests.post(url, data=data)
-        response.encoding = "utf–8"
+        response.encoding = "utf-8"
         print(response.text)
     except:
         print("\a发送失败\n请检查网络是否正常或页面是否存在")
@@ -45,7 +45,7 @@ def post(url, data):
 def get(url, data):
     try:
         response = requests.get(url, params=data)
-        response.encoding = "utf–8"
+        response.encoding = "utf-8"
         print(response.text)
     except:
         print("\a发送失败\n请检查网络是否正常或页面是否存在")
@@ -105,12 +105,12 @@ def findadmin(url):
                 "JSP.txt", "MDB.txt", "PHP.txt"]
         for ikind in kind:
             txtlist = path_dict.get_file(ikind)
-            for i in txtlist:
+            for i in tqdm(txtlist):
                 t1 = threading.Thread(target=shaomiao, args=(i,))
                 t1.start()
     else:
         txtlist = path_dict.get_file(kind)
-        for i in txtlist:
+        for i in tqdm(txtlist):
             # print("\r进度("+str(s+f)+"/"+str(num)+")",end="")
             t1 = threading.Thread(target=shaomiao, args=(i,))
             t1.start()
