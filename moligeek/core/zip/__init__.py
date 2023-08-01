@@ -123,6 +123,7 @@ class ZipPasswordGuesser:
         return guess_in_multiprocess(self.path, min_length, max_length, n_processes, slice_size)
 
 def zipkey(path,mode):
+    path = remove_quotes(path)
     global PWD_SEED
     if mode in ["number",0]:
         PWD_SEED = b"1234567890"
@@ -135,7 +136,16 @@ def zipkey(path,mode):
     k = zp.guess_mp(n_processes=16, slice_size=1000)
     #k = zp.guess_normal()
     ed = time.time()
-    print(f"密码为{k.decode('utf8')},总计用时{int((ed - st)*10)/10}s")
+    return f"密码为{k.decode('utf8')},总计用时{int((ed - st)*10)/10}s"
+
+# 检测并去除引号
+def remove_quotes(string):
+    if len(string) >= 2 and string[0] == string[-1] and (string[0] == '"' or string[0] == "'"):
+        return string[1:-1]
+    return string
+
+
+
 if __name__ == "__main__":
     # zipkey_plus(r"C:\Users\yourm\Desktop\1\flag.zip")
     # guess_pwd("./test/flag.zip")
