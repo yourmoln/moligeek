@@ -23,14 +23,14 @@
   <p align="center">
     打造最完善的python工具!
     <br />
-    <a href="https://github.com/yourmoln/moligeek"><strong>探索本项目的文档 »</strong></a>
+    <a href="https://github.com/yourmoln/moligeek#%E7%9B%AE%E5%BD%95"><strong>探索本项目的文档 »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/yourmoln/moligeek">查看Demo</a>
+    <a href="https://www.bilibili.com/video/BV1vG411P79B/">查看Demo</a>
     ·
-    <a href="https://github.com/yourmoln/moligeek/issues">报告Bug</a>
+    <a href="https://github.com/yourmoln/moligeek/issues/new?assignees=&labels=bug&projects=&template=bug_report.md&title=%5BBug%5D%E6%88%91%E5%8F%91%E7%8E%B0%E4%B8%80%E4%B8%AA%E6%96%B0%E7%9A%84Bug%3A">报告Bug</a>
     ·
-    <a href="https://github.com/yourmoln/moligeek/issues">提出新特性</a>
+    <a href="https://github.com/yourmoln/moligeek/issues/new?assignees=&labels=help+wanted&projects=&template=feature_request.md&title=%5BFeature+Request%5D%E6%88%91%E6%9C%89%E4%B8%80%E4%B8%AA%E6%96%B0%E7%9A%84%E5%8A%9F%E8%83%BD%E5%BB%BA%E8%AE%AE%3A">提出新特性</a>
   </p>
 
 </p>
