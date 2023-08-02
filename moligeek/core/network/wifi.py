@@ -1,5 +1,5 @@
 import pywifi,time
-class hackwifi:
+class HackWifi:
     def choose(self):
         self.ifaces.scan()
         result=self.ifaces.scan_results()
@@ -39,5 +39,5 @@ class hackwifi:
 
 
 if __name__ == "__main__":
-    a = hackwifi()
+    a = HackWifi()
 

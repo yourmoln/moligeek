@@ -5,7 +5,7 @@ headers = {
 }
 
 #本机信息
-from .hostinfo import hostinfo
+from .hostinfo import Hostinfo
 
 # ping
 def ping(host):
@@ -21,7 +21,7 @@ def getip(name):
 
 
 # 洪水攻击
-class attack:
+class Attack:
     def attack(self):
         for i in range(self.speed):
             try:
@@ -45,7 +45,7 @@ class attack:
         }
 
 
-class ddos:
+class Ddos:
     # 泛洪攻击
     def all(self):
         self.data['port'] = self.port

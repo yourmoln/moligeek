@@ -10,7 +10,7 @@ if __name__ =='__main__':
     mainmode = input("请选择模式:\n[0]本机信息\n[1]web\n[2]network\n[3]LAN\n[4]密文处理\n[5]压缩包破解\n")
     if mainmode in ["0", "本机信息"]:
         print("获取信息中...")
-        a = network.hostinfo()
+        a = network.Hostinfo()
         result = a.all()
         for key,value in result.items():
             print("="*20)
@@ -60,7 +60,7 @@ if __name__ =='__main__':
             except:
                 print("设置错误，默认为10")
                 speed = 10
-            a = network.attack(url,speed)
+            a = network.Attack(url,speed)
             t = threading.Thread(target=a.startattack, args=())
             t.start()
             while True:
@@ -75,7 +75,7 @@ if __name__ =='__main__':
         if mode in ["1", "泛洪攻击"]:
             meo.screen.red_font("注意！此功能极有可能耗尽你的宽带")
             port = int(input("请输入起始端口:"))
-            d = network.ddos(target_ip, port = port)
+            d = network.Ddos(target_ip, port = port)
             t = threading.Thread(target=d.all, args=())
             t.start()
             while True:
@@ -83,7 +83,7 @@ if __name__ =='__main__':
         if mode in ["2", "洪攻击"]:
             meo.screen.red_font("注意！此功能极有可能耗尽你的宽带")
             port = int(input("请输入目标端口:"))
-            d = network.ddos(target_ip, port = port)
+            d = network.Ddos(target_ip, port = port)
             t = threading.Thread(target=d.one, args=())
             t.start()
             while True:
@@ -97,7 +97,7 @@ if __name__ =='__main__':
         if mode in ["1", "设备扫描"]:
             range = input("请输入扫描范围\n例:192.168.1\n")
             print("扫描中...")
-            scan = LAN.scan(range)
+            scan = LAN.Scan(range = range)
             for i in scan.run():
                 print(i)
             print("扫描完成")
