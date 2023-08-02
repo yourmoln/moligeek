@@ -3,3 +3,5 @@ test/**
 .eggs
 moligeek.egg-info
 dist
+venv
+.venv
