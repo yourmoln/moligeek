@@ -1,14 +1,14 @@
 from setuptools import setup, find_packages
 
-import os
+import pathlib
 info = {}
-PATH = os.path.dirname(os.path.abspath(__file__))
-with open(os.path.join(PATH, "moligeek/__version__.py"), 'r', encoding='utf8') as f:
+PATH = pathlib.Path(__file__).parents[0]
+with open(PATH / "moligeek" / "__version__.py", 'r', encoding='utf8') as f:
     exec(f.read(), info)
 
-with open(os.path.join(PATH, "README.md"), 'r', encoding='utf8') as f:
+with open(PATH / "README.md", 'r', encoding='utf8') as f:
     long_description = f.read()
-with open('requirements.txt', 'r') as file:
+with open(PATH / 'requirements.txt', 'r') as file:
     lines = file.readlines()
     requires = [line.strip() for line in lines]
 
