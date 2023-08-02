@@ -1,0 +1,3 @@
+include README.md LICENSE requirements.txt
+recursive-include moligeek/path_dict *.txt
+recursive-include moligeek/database *.dat
