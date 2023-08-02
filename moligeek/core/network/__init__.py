@@ -1,7 +1,7 @@
 import os,socket,threading,requests,meo,random
 
 headers = {
-    "User-Agent": meo.net.UserAgent.FIREFOX.value
+    "User-Agent": meo.net.UserAgent.FIREFOX
 }
 
 #本机信息
