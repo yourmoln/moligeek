@@ -14,7 +14,7 @@ from .imitate import Imitate
 
 HOST_PATTERN = r".+://(.+)"
 headers = {
-    "User-Agent": meo.net.UserAgent.FIREFOX.value
+    "User-Agent": meo.net.UserAgent.FIREFOX
 }
 
 
