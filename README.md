@@ -53,6 +53,18 @@
 ## 运行环境安装
 
 ### Termux
+**快速安装**  
+1.Termux可依次运行以下指令进行安装
+```
+apt install python
+pip install moligeek
+```
+2.输入moligeek开始运行
+```
+moliggk
+```
+
+**传统安装**  
 1.Termux可依次运行以下指令进行安装
 ```
 apt install python
@@ -96,9 +108,17 @@ yum install python
 
 ## 使用需求
 
-1. 安装脚本
+**快速安装**
 
-**安装步骤**
+```sh
+pip install moligeek
+```
+
+输入moligeek直接运行即可
+
+**传统安装**
+
+1. 安装脚本
 
 ```sh
 git clone https://github.com/yourmoln/moligeek.git
@@ -106,13 +126,11 @@ git clone https://github.com/yourmoln/moligeek.git
 
 2. 运行脚本
 
-**如何运行**
-
 ```sh
 python ./moligeek/main.py
 ```
 
-**请在项目根目录下运行该指令**
+请在项目根目录下运行该指令
 
 ### 现有功能
 1. 下载源码  
