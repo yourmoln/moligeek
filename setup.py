@@ -55,5 +55,9 @@ setup(
         'pytest>=3.3.1',
         'pytest-cov>=2.5.1',
     ],
-
+    entry_points={
+        'console_scripts': [
+            'moligeek = moligeek:run',
+        ],
+    }
 )

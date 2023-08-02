@@ -69,12 +69,13 @@ sed -i 's@^\(deb.*stable main\)$@#\1\ndeb https://mirrors.tuna.tsinghua.edu.cn/t
 apt update && apt upgrade
 ```
 ### Windows
-0. 在本仓库的[releases](https://github.com/yourmoln/moligeek/releases)下载windows版本的moligeek（推荐），或者选择以下做法进行安装
-1. 可前往Python官网下载: [官网](https://www.python.org/)
-2. 如果Windows版本高于16299(Windows 10 1709)并且软件包安装程序为最新版本，可尝试使用Winget命令安装Python
+**以下为三种不同的安装方式**
+1. 在本仓库的[releases](https://github.com/yourmoln/moligeek/releases)下载windows版本的moligeek
+2. 如果Windows版本高于16299(Windows 10 1709)并且软件包安装程序为最新版本，可尝试使用Winget命令安装moligeek
 ```
-winget install Python.Python.3.10
+winget install moligeek
 ```
+3. 使用python运行本仓库的源代码
 ---
 
 ### Linux
