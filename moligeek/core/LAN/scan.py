@@ -1,8 +1,8 @@
 import os
 import threading
-class scan:
-    def __init__(self,ip_range):
-        self.range = ip_range
+class Scan:
+    def __init__(self,range = '192.168.1'):
+        self.range = range
         self.ip_list = []
         if os.name == "nt":
             def scan_device(ip):
@@ -33,7 +33,7 @@ class scan:
             t.join()
         return self.ip_list
 if __name__ == '__main__':
-    a=scan("192.168.31")
+    a=Scan("192.168.31")
     for i in a.run():
         print(i)
     print("扫描完成")

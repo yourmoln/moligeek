@@ -1,7 +1,7 @@
 import socket,json,os,platform,time
 from urllib.request import urlopen
 
-class hostinfo:
+class Hostinfo:
     def getip(self):
         try:
             s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -33,7 +33,7 @@ class hostinfo:
         self.ip = self.getip()
 if __name__ == "__main__":
     print("获取信息中...")
-    a = hostinfo()
+    a = Hostinfo()
     result = a.all()
     for key,value in result.items():
         print("="*20)

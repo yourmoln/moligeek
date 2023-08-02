@@ -1,2 +1,5 @@
 **/__pycache__
 test/**
+.eggs
+moligeek.egg-info
+dist

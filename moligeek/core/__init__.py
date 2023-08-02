@@ -1,5 +1,13 @@
-__version__ = "1.0.0"
-__url__     = "https://github.com/yourmoln/moligeek"
+import os
+info = {}
+PATH = os.path.dirname(os.path.abspath(__file__))
+with open(os.path.join(PATH, "../__version__.py"), 'r', encoding='utf8') as f:
+    exec(f.read(), info)
+
+
+
+__version__ = info['__version__']
+__url__     = info['__url__']
 __docs__ = rf"""=============================================
                  _ _                 _     
  _ __ ___   ___ | (_) __ _  ___  ___| | __
