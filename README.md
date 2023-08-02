@@ -61,7 +61,7 @@ pip install moligeek
 ```
 2.输入moligeek开始运行
 ```
-moliggk
+moligeek
 ```
 
 **传统安装**  
