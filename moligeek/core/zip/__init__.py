@@ -136,7 +136,7 @@ def zipkey(path,mode):
     k = zp.guess_mp(n_processes=16, slice_size=1000)
     #k = zp.guess_normal()
     ed = time.time()
-    return f"密码为{k.decode('utf8')},总计用时{int((ed - st)*10)/10}s"
+    return k.decode('utf8'),int((ed - st)*10)/10
 
 # 检测并去除引号
 def remove_quotes(string):
@@ -156,5 +156,5 @@ if __name__ == "__main__":
     # print(k)
     # ed = time.time()
     # print(ed - st)
-    zipkey(r"C:\Users\yourm\Desktop\1\flag.zip",1)
+    password,time = zipkey(r"C:\Users\yourm\Desktop\1\flag.zip",1)
     ...
