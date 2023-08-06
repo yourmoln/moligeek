@@ -109,9 +109,8 @@ def run():
                 print("设置错误，默认为10")
                 speed = 10
             a = network.Attack(url,speed)
-            t = threading.Thread(target=a.startattack, args=())
-            t.start()
-            while True:
+            a.run()
+            while a.start:
                 print("\r已发送{}个包，失效{}个包".format(
                 a.collector['success'] + a.collector['err'],
                 a.collector['err']
@@ -124,17 +123,15 @@ def run():
             print("\033[31m注意！此功能极有可能耗尽你的宽带\033[0m")#红色字体
             port = int(input("请输入起始端口:"))
             d = network.Ddos(target_ip, port = port)
-            t = threading.Thread(target=d.all, args=())
-            t.start()
-            while True:
+            d.all()
+            while d.start:
                 print ("\r已发送 %s 个包到 %s 通过端口:%s"%(d.data['sent'],d.ip,d.data['port']),end="")
         if mode in ["2", "洪攻击"]:
             print("\033[31m注意！此功能极有可能耗尽你的宽带\033[0m")#红色字体
             port = int(input("请输入目标端口:"))
             d = network.Ddos(target_ip, port = port)
-            t = threading.Thread(target=d.one, args=())
-            t.start()
-            while True:
+            d.one()
+            while d.start:
                 print ("\r已发送 %s 个包到 %s 通过端口:%s"%(d.data['sent'],d.ip,d.port),end="")
         if mode in ["3", "ping"]:
             print("pinging...")
@@ -167,10 +164,11 @@ def run():
         zip_path = input("请输入压缩包路径:")
         mode = input("请选择破解模式:\n[1]纯数字\n[2]数字字母混合\n[3]数字字母符号混合\n")
         if mode in ["1", "纯数字"]:
-            print(zip.zipkey(zip_path,0))
+            password,time = zip.zipkey(zip_path,0)
         if mode in ["2", "数字字母混合"]:
-            print(zip.zipkey(zip_path,1))
+            password,time = zip.zipkey(zip_path,1)
         if mode in ["3", "数字字母符号混合"]:
-            print(zip.zipkey(zip_path,2))
+            password,time = zip.zipkey(zip_path,2)
+        print(f"密码为{password},总共耗时{time}秒")
     if os.name == "nt":
         input("按回车键结束程序")

