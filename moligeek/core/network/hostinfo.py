@@ -1,5 +1,5 @@
 import socket,json,os,platform,time
-from urllib.request import urlopen
+from requests import get
 
 class Hostinfo:
     def getip(self):
@@ -15,7 +15,7 @@ class Hostinfo:
         return ip
     def getoutip(self):
         try:
-            return json.load(urlopen('http://jsonip.com'))['ip']
+            return get('http://ifconfig.me/ip', timeout=1).text.strip()
         except:
             return None
     def all(self):
