@@ -13,5 +13,6 @@ jobs:
       - uses: vedantmgoyal2009/winget-releaser@v2
         with:
           identifier: yourmoln.moligeek
+          installers-regex: '\.exe$'
           release-tag: ${{ inputs.version }}
           token: ${{ secrets.WINGET_TOKEN }}
