@@ -10,5 +10,7 @@ jobs:
       - uses: vedantmgoyal2009/winget-releaser@v2
         with:
           identifier: yourmoln.moligeek
-          installers-regex: '.exe$' # Only .exe files
+          installers-regex: '\.exe$'
+          version: ${{ github.event.release.name }}
+          release-tag: ${{ github.event.release.name }}
           token: ${{ secrets.WINGET_TOKEN }}
