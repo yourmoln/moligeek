@@ -122,7 +122,12 @@ class ZipPasswordGuesser:
     def guess_mp(self, min_length=None, max_length=None, n_processes=8, slice_size=500):
         return guess_in_multiprocess(self.path, min_length, max_length, n_processes, slice_size)
 
-def zipkey(path,mode):
+def zipkey(path:str,mode:int) -> tuple:
+    """`zip`压缩包密码破解\n
+    mode:\n
+    0:纯数字密码\n
+    1:数字字母混合\n
+    2:数字字母符号混合"""
     path = remove_quotes(path)
     global PWD_SEED
     if mode in ["number",0]:
@@ -138,8 +143,8 @@ def zipkey(path,mode):
     ed = time.time()
     return k.decode('utf8'),int((ed - st)*10)/10
 
-# 检测并去除引号
-def remove_quotes(string):
+def remove_quotes(string:str) -> str:
+    """检测并去除引号"""
     if len(string) >= 2 and string[0] == string[-1] and (string[0] == '"' or string[0] == "'"):
         return string[1:-1]
     return string

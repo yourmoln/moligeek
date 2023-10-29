@@ -7,13 +7,16 @@ sys.path.append(script_path)
 import core
 import random
 import pickle
-def yiyan():
+def yiyan() -> str:
+    """获取一言"""
     with open(os.path.join(script_path, "./database/YiYan.dat"), "rb") as f:
         YiYans = pickle.loads(f.read())
-    meo.screen.blue_font('一言:'+YiYans[str(random.randint(1, len(YiYans)))])
-def start():
+    return YiYans[str(random.randint(1, len(YiYans)))]
+def start() -> None:
+    """logo"""
     print(core.__docs__)
-    yiyan()
+    yy = yiyan()
+    meo.screen.blue_font('一言:'+ yy)
 requirements_path = os.path.join(script_path, "../requirements.txt")
 for _ in range(3):
     try:
@@ -51,7 +54,8 @@ import core.encode as encode
 import core.LAN as LAN
 import core.text as text
 
-def run():
+def run() -> None:
+    """运行"""
     import sys
     import os
     import threading

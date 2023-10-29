@@ -1,6 +1,6 @@
 import math
 
-def decrypt(cipher, key):
+def decrypt(cipher:str, key:int) -> str:
     """`栅栏密码`的解密函数. 与`千千秀字`的结果一致."""
     assert type(key) is int
 
@@ -17,7 +17,7 @@ def decrypt(cipher, key):
             j += gsize if j < common_count * gsize else gsize - 1
     return res
 
-def encrypt(plain, key):
+def encrypt(plain:str, key:int) -> str:
     """`栅栏密码`的加密函数. """
     assert type(key) is int
 

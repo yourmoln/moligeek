@@ -1,5 +1,5 @@
-# 检测并去除引号
-def remove_quotes(string):
+def remove_quotes(string:str) -> str:
+    """检测并去除引号"""
     if len(string) >= 2 and string[0] == string[-1] and (string[0] == '"' or string[0] == "'"):
         return string[1:-1]
     return string

