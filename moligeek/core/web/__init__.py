@@ -18,7 +18,8 @@ headers = {
 }
 
 
-def getsrc(url, output=None, headers=headers):
+def getsrc(url:str, output=None, headers=headers) -> str:
+    """获取网站源码并保存到`./output/`"""
     host_match = re.match(HOST_PATTERN, url)
     host = host_match.group(1)
     try:
@@ -33,7 +34,8 @@ def getsrc(url, output=None, headers=headers):
         return None
 
 
-def post(url, data):
+def post(url:str, data:dict) -> str:
+    """以`post`的方式提交表单"""
     try:
         response = requests.post(url, data=data)
         response.encoding = "utf-8"
@@ -42,7 +44,8 @@ def post(url, data):
         return None
 
 
-def get(url, data):
+def get(url:str, data:dict) -> str:
+    """以`get`的方式提交表单"""
     try:
         response = requests.get(url, params=data)
         response.encoding = "utf-8"
@@ -50,8 +53,8 @@ def get(url, data):
     except:
         return None
 
-# 提交表单
-def upform(url,method = 'get',formdata = None):
+def upform(url:str,method:str = 'get',formdata:dict = None) -> str:
+    """提交表单"""
     if method in ["1", "post"]:
         return post(url, formdata)
     elif method in ["2", "get"]:
@@ -59,8 +62,8 @@ def upform(url,method = 'get',formdata = None):
     else:
         return None
 
-# 后台文件扫描
 def findadmin(url,kind = 1):
+    """后台文件扫描"""
     up_list = []
     def scan(path):
         path = path.strip()

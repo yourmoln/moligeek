@@ -7,13 +7,16 @@ sys.path.append(script_path)
 import core
 import random
 import pickle
-def yiyan():
+def yiyan() -> str:
+    """获取一言"""
     with open(os.path.join(script_path, "./database/YiYan.dat"), "rb") as f:
         YiYans = pickle.loads(f.read())
-    meo.screen.blue_font('一言:'+YiYans[str(random.randint(1, len(YiYans)))])
-def start():
+    return YiYans[str(random.randint(1, len(YiYans)))]
+def start() -> None:
+    """logo"""
     print(core.__docs__)
-    yiyan()
+    yy = yiyan()
+    meo.screen.blue_font('一言:'+ yy)
 requirements_path = os.path.join(script_path, "../requirements.txt")
 for _ in range(3):
     try:
@@ -49,15 +52,26 @@ import core.web as web
 import core.zip as zip
 import core.encode as encode
 import core.LAN as LAN
+import core.text as text
 
-def run():
+def run() -> None:
+    """运行"""
     import sys
     import os
     import threading
     script_path = os.path.split(os.path.realpath(__file__))[0]
     sys.path.append(script_path)
     start()
-    mainmode = input("请选择模式:\n[0]本机信息\n[1]web\n[2]network\n[3]LAN\n[4]密文处理\n[5]压缩包破解\n")
+    menu = """请选择模式:
+[0]本机信息
+[1]web
+[2]network
+[3]LAN
+[4]密文处理
+[5]压缩包破解
+[6]文本处理
+"""
+    mainmode = input(menu)
     if mainmode in ["0", "本机信息"]:
         print("获取信息中...")
         a = network.Hostinfo()
@@ -172,5 +186,13 @@ def run():
         if mode in ["3", "数字字母符号混合"]:
             password,time = zip.zipkey(zip_path,2)
         print(f"密码为{password},总共耗时{time}秒")
+    elif mainmode in ["6", "文本处理"]:
+        mode = input("请选择模式:\n[1]替换关键词\n")
+        if mode in ["1", "关键词替换"]:
+            file = input("请输入文件路径:")
+            key = input("请输入关键词:")
+            value = input("请输入替换值:")
+            text.reKey(file,key,value)
+            print("替换完成")
     if os.name == "nt":
         input("按回车键结束程序")

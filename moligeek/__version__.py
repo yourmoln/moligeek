@@ -1,5 +1,5 @@
 __name__    = "moligeek"
-__version__ = "1.0.9"
+__version__ = "1.1.1"
 __author__   = "yourmoln"
 __author_email__ = "yourmoln@outlook.com"
 __url__     = "https://github.com/yourmoln/moligeek"

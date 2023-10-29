@@ -2,7 +2,11 @@ import socket,json,os,platform,time
 from requests import get
 
 class Hostinfo:
+    """获取本机信息"""
     def getip(self):
+        """获取内网ip"""
+        ip = None
+        port = None
         try:
             s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
             address = ("8.8.8.8", 80)
@@ -14,11 +18,13 @@ class Hostinfo:
             s.close()
         return ip
     def getoutip(self):
+        """获取公网ip"""
         try:
             return get('http://ifconfig.me/ip', timeout=1).text.strip()
         except:
             return None
-    def all(self):
+    def all(self) -> dict:
+        """获取所有信息"""
         result = {"网络信息":{"公网ip":self.outip,"内网ip":self.ip},
                   "系统信息":{"系统类型":platform.system(),
                                 "系统版本":platform.version(),

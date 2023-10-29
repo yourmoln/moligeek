@@ -1,6 +1,7 @@
 import base64,urllib
 
 class todecode:
+    """密文解码"""
     def base64(self):
         try:
             return base64.b64decode(self.text.encode("utf-8")).decode("utf-8")
@@ -26,9 +27,10 @@ class todecode:
             return self.text.encode("utf-8").decode("unicode_escape")
         except:
             return
-    def autodecode(self):
+    def autodecode(self) -> dict:
+        """解出所有类型"""
         return {"base64":self.base64(),"base32":self.base32(),"base16":self.base16(),"URL":self.url(),"unicode":self.unicode()}
-    def __init__(self,text):
+    def __init__(self,text:str):
         self.text = text
 if __name__ == "__main__":
     a = todecode("5L2g5aW9")
