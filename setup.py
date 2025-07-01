@@ -22,7 +22,7 @@ setup(
     description = info['__description__'],
     license = info["__license__"],
     url = info['__url__'], 
-    python_requires = ">=3.7",
+    python_requires = ">=3.8",
 
     packages=find_packages(),
     include_package_data = True,
@@ -42,11 +42,12 @@ setup(
 
         'License :: OSI Approved :: Apache Software License',
 
-        'Programming Language :: Python :: 3.7',
         'Programming Language :: Python :: 3.8',
         "Programming Language :: Python :: 3.9",
         "Programming Language :: Python :: 3.10",
         "Programming Language :: Python :: 3.11",
+        "Programming Language :: Python :: 3.12",
+        "Programming Language :: Python :: 3.13",
     ],
 
     install_requires=requires,

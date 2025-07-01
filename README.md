@@ -167,7 +167,7 @@ python ./moligeek/main.py
 
 [yourmoln](https://github.com/yourmoln)
 
-qq交流群:564136017    
+问题反馈请发issue    
 
  *您也可以在贡献者名单中参看所有参与该项目的开发者。*
 
