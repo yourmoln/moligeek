@@ -3,7 +3,8 @@ from requests import get
 
 class Hostinfo:
     """获取本机信息"""
-    def getip(self):
+    @staticmethod
+    def getip():
         """获取内网ip"""
         ip = None
         port = None
@@ -17,7 +18,8 @@ class Hostinfo:
         finally:
             s.close()
         return ip
-    def getoutip(self):
+    @staticmethod
+    def getoutip():
         """获取公网ip"""
         try:
             return get('http://ifconfig.me/ip', timeout=1).text.strip()

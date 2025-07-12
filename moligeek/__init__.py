@@ -156,9 +156,10 @@ def run() -> None:
         mode = input("请选择模式:\n[1]设备扫描\n")
 
         if mode in ["1", "设备扫描"]:
-            range = input("请输入扫描范围\n例:192.168.1\n")
+            range = input("请输入扫描范围，不输入则默认扫描当前局域网\n例:192.168.1\n")
             print("扫描中...")
-            scan = LAN.Scan(range = range)
+            if range == "": scan = LAN.Scan()
+            else: scan = LAN.Scan(range = range)
             for i in scan.run():
                 print(i)
             print("扫描完成")

@@ -1,25 +1,30 @@
 import os
 import threading
+import subprocess
+from core.network import Hostinfo
+
 class Scan:
     """子网扫描"""
-    def __init__(self,range:str = '192.168.1'):
+
+    def __init__(self, range:str = ".".join(Hostinfo.getip().split(".")[:-1]) ):
         self.range = range
         self.ip_list = []
         if os.name == "nt":
             def scan_device(ip):
                 address = ip
-                response = os.popen("ping -n 1 " + address).read()
-
+                result = subprocess.run(["ping", "-n", "1", address], capture_output=True, text=True)
+                response = result.stdout
                 if "ttl" in response.lower():
                     self.ip_list.append(address)
         else:
             def scan_device(ip):
                 address = ip
-                response = os.system("ping -c 1 " + address)
-
+                result = subprocess.run(["ping", "-c", "1", address], capture_output=True, text=True)
+                response = result.stdout
                 if "ttl" in response.lower():
                     self.ip_list.append(address)
         self.ping = scan_device
+
     def run(self) -> list:
         """多线程扫描"""
         # Create a list of threads
@@ -34,8 +39,10 @@ class Scan:
         for t in threads:
             t.join()
         return self.ip_list
-if __name__ == '__main__':
-    a=Scan(range = "192.168.31")
+
+
+if __name__ == "__main__":
+    a = Scan(range="192.168.31")
     for i in a.run():
         print(i)
     print("扫描完成")
