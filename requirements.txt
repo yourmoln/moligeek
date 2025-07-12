@@ -5,3 +5,4 @@ pywifi
 comtypes
 tqdm
 asyncio
+pythonping

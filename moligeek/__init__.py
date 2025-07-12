@@ -161,7 +161,7 @@ def run() -> None:
             if range == "": scan = LAN.Scan()
             else: scan = LAN.Scan(range = range)
             for i in scan.run():
-                print(i)
+                print(f"{i[0]}\t{i[1]}")
             print("扫描完成")
     elif mainmode in ["4", "密文处理"]:
         codetext = input("请输入文本:")
