@@ -1,7 +1,6 @@
 import os
-import threading
-from pythonping import ping
-import socket
+import socket,subprocess
+from concurrent.futures import ThreadPoolExecutor
 from core.network import Hostinfo
 
 class Scan:
@@ -10,27 +9,22 @@ class Scan:
     def __init__(self, range:str = ".".join(Hostinfo.getip().split(".")[:-1]) ):
         self.range = range
         self.ip_list = []
+        self.m = '-n' if os.name == 'nt' else '-c'
     def scan_device(self,ip):
-        response = ping(ip, count=1, timeout=1)
-        if response.success():
+        cmd = ["ping", self.m, "1", ip]
+        result = subprocess.run(cmd, capture_output=True, text=True)
+        response = result.stdout
+        if "ttl" in response.lower():
             try:
                 hostname = socket.gethostbyaddr(ip)[0]
             except Exception:
                 hostname = "未知设备"
             self.ip_list.append([ip, hostname])
     def run(self) -> list:
-        """多线程扫描"""
-        # Create a list of threads
-        threads = []
-        # Scan
-        for i in range(1, 255):
-            ip = self.range + "." + str(i)
-            t = threading.Thread(target=self.scan_device, args=(ip,))
-            threads.append(t)
-            t.start()
-        # Wait for all threads to complete
-        for t in threads:
-            t.join()
+        """线程池扫描"""
+        with ThreadPoolExecutor(max_workers=256) as executor:
+            ips = [self.range + "." + str(i) for i in range(255)]
+            executor.map(self.scan_device, ips)
         return self.ip_list
 
 

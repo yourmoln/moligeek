@@ -5,6 +5,8 @@ import threading
 import sys
 import os
 from tqdm import tqdm
+from concurrent.futures import ThreadPoolExecutor, as_completed
+
 script_path = os.path.split(os.path.realpath(__file__))[0]
 sys.path.append(os.path.join(script_path, "../../"))
 import path_dict
@@ -92,28 +94,27 @@ def findadmin(url,kind = 1):
     else:
         kind = 1
     # Create a list of threads
-    threads = []
     if kind == 1:
         kind = ["ASP.txt", "ASPX.txt", "DIR.txt",
                 "JSP.txt", "MDB.txt", "PHP.txt"]
-        for ikind in kind:
-            txtlist = path_dict.get_file(ikind)
-            for i in tqdm(txtlist):
-                t = threading.Thread(target=scan, args=(i,))
-                threads.append(t)
-                t.start()
+        with ThreadPoolExecutor() as executor:
+            futures = []
+            for ikind in kind:
+                txtlist = path_dict.get_file(ikind)
+                for i in tqdm(txtlist):
+                    futures.append(executor.submit(scan, i))
+            for future in as_completed(futures):
+                pass
     else:
         txtlist = path_dict.get_file(kind)
-        for i in tqdm(txtlist):
-            # print("\r进度("+str(s+f)+"/"+str(num)+")",end="")
-            t = threading.Thread(target=scan, args=(i,))
-            threads.append(t)
-            t.start()
-    for t in threads:
-        t.join()
+        with ThreadPoolExecutor() as executor:
+            futures = []
+            for i in tqdm(txtlist):
+                futures.append(executor.submit(scan, i))
+            for future in as_completed(futures):
+                pass
     return up_list
 if __name__ == "__main__":
     getsrc(
         "https://miaobuao.github.io/"
     )
-    ...
